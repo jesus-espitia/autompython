@@ -19,6 +19,7 @@ if BASE_DIR not in sys.path:
 FUNCIONES_PRINCIPALES = {
     "top5_incidentes": "topDeInicidentes",
     "Formato_Fechas":"separar_fecha_hora_reporte_scaneo",
+    "Medidas_drasticas":"medidasDrasticas",
 }
 
 def listar_modulos():
