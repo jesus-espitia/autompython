@@ -31,7 +31,7 @@ def listar_modulos():
 def ejecutar_modulo(nombre_modulo):
     """Importa y ejecuta la función asociada en FUNCIONES_PRINCIPALES."""
     try:
-        print(f"\n🚀 Ejecutando módulo: {nombre_modulo}")
+        print(f"\n🚀 Ejecutando módulo: {nombre_modulo}\n")
 
         # Import dinámico
         modulo = importlib.import_module(f"app.routes.{nombre_modulo}")
