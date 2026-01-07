@@ -53,7 +53,7 @@ def separar_fecha_hora_columnas_dinamicas():
         # ==================================================
         columnas = set()
         while True:
-            col = input("\nCopia el nombre EXACTO de la columna o 0 para salir: \n").strip()
+            col = input("\nCopia el nombre EXACTO de la columna o 0 para salir:").strip()
             if col == "0":
                 break
 
