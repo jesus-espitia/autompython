@@ -5,7 +5,6 @@ from dateutil import parser
 from datetime import time
 from openpyxl import load_workbook
 
-
 def separar_fecha_hora_reporte_scaneo():
     try:
         print("\n🧩 Separación REAL de Fecha y Hora - Excel compatible")
