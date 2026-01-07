@@ -22,6 +22,7 @@ FUNCIONES_PRINCIPALES = {
     "medidas_drasticas":"medidasDrasticas",
 }
 
+
 def listar_modulos():
     """Devuelve lista de archivos .py en routes."""
     return [
