@@ -1,0 +1,28 @@
+19/12/2025
+
+Se realiza análisis del TOP 5 de los servidores con más incidentes entre 12/12/2025 y 19/12/2025:
+
+
+Doliente: Microsoft Infra [
+	01. DNBQHV04 (PACS): 4 casos (Solarwinds 1504605 - Server - High memory usage, Solarwinds 1504095 - Server - High memory usage, Solarwinds 1503418 - Server - High memory usage, Solarwinds 1503375 - Server - High memory usage)
+	NOTA:
+
+	02. DNMCRPS01 (PACS): 2 casos (Solarwinds 1507845 - Server - High CPU usage, Solarwinds 1501369 - Server - Server down)
+	NOTA:
+
+]
+
+Doliente: Microsoft AD [
+	01. SRADDSCP01 (DC - CG): 5 casos (Solarwinds 1509498 - Server - High memory usage, Solarwinds 1509522 - Server - Low storage space, Solarwinds 1504606 - Server - High memory usage, Solarwinds 1503594 - Server - High memory usage, Solarwinds 1503201 - Server - High memory usage)
+	NOTA:
+
+	02. SRADCLOUDL02 (DC - CG): 2 casos (Solarwinds 1503559 - Server - High CPU usage, Solarwinds 1501354 - Server - High CPU usage)
+	NOTA:
+
+]
+
+Doliente: OTROS [
+	01. FILEZILLA (SIN TIPO): 2 casos (Otras Aps Empresarial, Otras Aps Empresarial)
+	NOTA:
+
+]

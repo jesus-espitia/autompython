@@ -1,0 +1,22 @@
+12/12/2025
+
+Se realiza análisis del TOP 5 de los servidores con más incidentes entre 05/12/2026 y 12/12/2026:
+
+
+Doliente: Microsoft Infra [
+	01. DNMCRPS01 (PACS): 3 casos (Solarwinds 1499250 - Server - Server down, Solarwinds 1492797 - Server - Server down, Solarwinds 1492443 - Server - Server down)
+	NOTA:
+
+	02. DNBGPS02 (PACS): 3 casos (Solarwinds 1497448 - Server - High CPU usage, Solarwinds 1497188 - Server - High CPU usage, Solarwinds 1496835 - Server - High CPU usage)
+	NOTA:
+
+	03. DNCRHV01 (PACS): 2 casos (Solarwinds 1492804 - Server - Server down, Solarwinds 1492445 - Server - Server down)
+	NOTA:
+
+	04. DNCAHV01 (PACS): 2 casos (Ayudas DX RIS-PACS, Solarwinds 1493414 - Server - Server down)
+	NOTA:
+
+	05. ERIS_DB_IATM (IATM): 2 casos (Solarwinds 1493759 - Server - Server down, Solarwinds 1493730 - Synthetic - Website down)
+	NOTA:
+
+]

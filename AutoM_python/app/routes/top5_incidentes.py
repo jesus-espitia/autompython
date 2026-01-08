@@ -5,7 +5,8 @@ import re
 
 def topDeInicidentes():
     try:
-        print("📊 Ejecutando análisis Top 5 de incidentes...\n")
+        print("📊 Ejecutando análisis Top 5 de incidentes...")
+        print(" ⚠️ RECUERDA QUE ESTO SE EJECUTA DE VIERNES A VIERNES ⚠️ \n")
 
         base_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(base_dir, "..", ".."))
@@ -23,6 +24,12 @@ def topDeInicidentes():
                 return pd.DataFrame()
             df = pd.read_excel(path)
             df.columns = [c.strip().lower() for c in df.columns]
+
+            # ELIMINAR FILAS SIN SERVIDOR
+            df = df[df.iloc[:,0].notna()]
+
+            # NORMALIZAR SERVIDOR
+            df.iloc[:,0] = df.iloc[:,0].astype(str).str.upper().str.strip()
             return df
 
         infra_inv = cargar_inventario(infra_file)
@@ -50,6 +57,12 @@ def topDeInicidentes():
 
         col_id, col_ticket, col_resumen = "mostrar id", "external system ticket", "resumen"
         df_inc = df[df[col_id].astype(str).str.startswith("INC")]
+
+        # ELIMINAR INCIDENTES SIN SERVIDOR
+        df_inc = df_inc[df_inc[col_ticket].notna()]
+
+        # NORMALIZAR SERVIDOR INCIDENTE
+        df_inc[col_ticket] = df_inc[col_ticket].astype(str).str.upper().str.strip()
 
         top5 = df_inc[col_ticket].value_counts().head(5)
 
@@ -93,7 +106,6 @@ def topDeInicidentes():
             rep.append("]")
 
         os.makedirs(txt_dir, exist_ok=True)
-
 
         fecha_archivo = datetime.now().strftime("%d-%m-%Y")
         out = os.path.join(txt_dir, f"Reporte_Incidentes_{fecha_archivo}.txt")

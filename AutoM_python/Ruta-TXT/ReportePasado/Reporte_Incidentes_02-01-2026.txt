@@ -1,0 +1,25 @@
+02/01/2026
+
+Se realiza análisis del TOP 5 de los servidores con más incidentes entre 26/21/2025 y 02/01/2026:
+
+
+Doliente: Microsoft Infra [
+	01. DNBQPS01 (PACS): 4 casos (Solarwinds 1519557 - Server - Server down, Solarwinds 1517645 - Server - Server down, Solarwinds 1517431 - Server - Server down, Solarwinds 1517077 - Server - Server down)
+	NOTA:
+
+	02. PACSCENTRO_IATM (IATM): 2 casos (Solarwinds 1517131 - Server - Server down, Solarwinds 1515593 - Server - Server down)
+	NOTA:
+
+	03. PACSINV_IATM (IATM): 2 casos (Solarwinds 1517132 - Server - Server down, Solarwinds 1515592 - Server - Server down)
+	NOTA:
+
+]
+
+Doliente: Microsoft AD [
+	01. SRADDSCP04 (DC - CG): 2 casos (Solarwinds 1519308 - Server - High memory usage, Solarwinds 1517625 - Server - High memory usage)
+	NOTA:
+
+	02. SRADDSCL02 (DC - CG): 2 casos (Solarwinds 1516837 - Server - Anomaly detected on Server, Solarwinds 1515822 - Server - Windows server rebooted)
+	NOTA:
+
+]

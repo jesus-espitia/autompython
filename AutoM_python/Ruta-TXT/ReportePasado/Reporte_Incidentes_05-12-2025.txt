@@ -1,0 +1,22 @@
+05/12/2025
+
+Se realiza análisis del TOP 5 de los servidores con más incidentes entre 28/11/2025 y 05/12/2025:
+
+
+Doliente: Microsoft Infra [
+	01. ERIS_DB_IATM (IATM): 3 casos (Solarwinds 1489466 - Server - Server down, Solarwinds 1489465 - Synthetic - Website down, Solarwinds 1488907 - Server - Linux server rebooted)
+	NOTA:
+
+	02. DNMDPS25 (PACS): 2 casos (Solarwinds 1492177 - Server - High CPU usage, Solarwinds 1491711 - Server - High CPU usage)
+	NOTA:
+
+	03. DNBGAHV01 (PACS): 2 casos (Solarwinds 1489860 - Server - High memory usage, Solarwinds 1489772 - Server - High memory usage)
+	NOTA:
+
+	04. DNMDPS16 (PACS): 2 casos (Solarwinds 1489532 - Server - Server down, Solarwinds 1489531 - Server - Server down)
+	NOTA:
+
+	05. DNPEHV01 (PACS): 1 casos (Solarwinds 1492323 - Server - High memory usage)
+	NOTA:
+
+]
