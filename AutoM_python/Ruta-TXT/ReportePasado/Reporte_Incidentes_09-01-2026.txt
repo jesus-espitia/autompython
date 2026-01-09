@@ -1,0 +1,25 @@
+09/01/2026
+
+Se realiza análisis del TOP 5 de los servidores con más incidentes entre 02/01/2026 y 09/01/2026:
+
+
+Doliente: Microsoft Infra [
+	01. SRFTP03 (FTP): 3 casos (Solarwinds 1520076 - Server - Low storage space, Solarwinds 1521119 - Server - Low storage space, Solarwinds 1520969 - Server - High memory usage)
+	NOTA:
+
+	02. DNMCRPS01 (PACS): 2 casos (Solarwinds 1521133 - Server - Server down, Solarwinds 1521134 - Server - Server down)
+	NOTA: Problemas con el componente de red
+
+	03. DNMDHV22 (PACS): 2 casos (Solarwinds 1519954 - Server - Server down, Solarwinds 1520646 - Server - Server down)
+	NOTA: Problemas con el componente de red
+
+	04. DNMDPS16 (PACS): 1 casos (Solarwinds 1522220 - Server - Server down)
+	NOTA: Problemas con el componente de red
+
+]
+
+Doliente: OTROS [
+	01. SRBOGDYAG02 (SIN TIPO): 2 casos (Solarwinds 1521074 - Server - High CPU usage, Solarwinds 1520581 - Server - High memory usage)
+	NOTA:
+
+]
