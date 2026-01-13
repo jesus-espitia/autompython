@@ -6,6 +6,7 @@ import sys
 BASE_DIR = os.path.dirname(__file__)
 RUTA_MODULOS = os.path.join(BASE_DIR, "routes")
 
+
 # Asegura que el directorio padre (el que contiene "app") esté en sys.path
 PARENT_DIR = os.path.dirname(BASE_DIR)
 if PARENT_DIR not in sys.path:
