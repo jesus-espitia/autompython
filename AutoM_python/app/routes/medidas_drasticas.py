@@ -39,8 +39,7 @@ def medidasDrasticas():
                 "Saturación de componente"
             ],
             "server down": [
-                "Problemas con el componente de red",
-                "Desconexión momentánea con el agente"
+                "Desconexión momentánea con el agente de SolarWinds"
             ],
             "reboot": [
                 "Reinicio inesperado",
