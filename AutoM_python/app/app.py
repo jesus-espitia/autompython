@@ -1,6 +1,7 @@
 import importlib
 import os
 import sys
+from datetime import datetime
 
 # === CONFIGURACIÓN DE RUTAS ===
 BASE_DIR = os.path.dirname(__file__)
@@ -19,8 +20,9 @@ if BASE_DIR not in sys.path:
 # Mapa de módulos y funciones a ejecutar
 FUNCIONES_PRINCIPALES = {
     "top5_incidentes": "topDeInicidentes",
-    "Formato_Fechas_Horas":"separar_fecha_hora_columnas_dinamicas",
-    "medidas_drasticas":"medidasDrasticas",
+    "Formato_Fechas_Horas": "separar_fecha_hora_columnas_dinamicas",
+    "medidas_drasticas": "medidasDrasticas",
+    "comparacion": "comparar_reporte_infra",
 }
 
 
@@ -30,6 +32,7 @@ def listar_modulos():
         f[:-3] for f in os.listdir(RUTA_MODULOS)
         if f.endswith(".py") and not f.startswith("__")
     ]
+
 
 def ejecutar_modulo(nombre_modulo):
     """Importa y ejecuta la función asociada en FUNCIONES_PRINCIPALES."""
@@ -56,6 +59,7 @@ def ejecutar_modulo(nombre_modulo):
     except Exception as e:
         print(f"❌ Error ejecutando '{nombre_modulo}': {e}\n")
 
+
 def mostrar_menu(modulos):
     print("\n===========================================")
     print("💻  ¿QUÉ DESEAS HACER HOY?")
@@ -65,7 +69,41 @@ def mostrar_menu(modulos):
     print("0. Salir")
     print("===========================================")
 
+
+# ==================================================
+# 🧹 LIMPIEZA 
+# ==================================================
+def limpiar_cache_pyc_mensual():
+    """
+    Elimina archivos .pyc de app/routes/__pycache__
+    únicamente si el día actual del mes es >= 15.
+    """
+    try:
+        hoy = datetime.now()
+        if hoy.day < 15:
+            return
+
+        base_dir = os.path.dirname(__file__)
+        cache_dir = os.path.join(base_dir, "routes", "__pycache__")
+
+        if not os.path.exists(cache_dir):
+            return
+
+        for archivo in os.listdir(cache_dir):
+            if archivo.endswith(".pyc"):
+                try:
+                    os.remove(os.path.join(cache_dir, archivo))
+                except:
+                    pass
+    except:
+        pass
+
+
 if __name__ == "__main__":
+
+    # 🧹 Limpieza automática (no interfiere con nada)
+    limpiar_cache_pyc_mensual()
+
     modulos = listar_modulos()
 
     if not modulos:
