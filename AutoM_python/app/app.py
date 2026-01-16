@@ -23,6 +23,7 @@ FUNCIONES_PRINCIPALES = {
     "Formato_Fechas_Horas": "separar_fecha_hora_columnas_dinamicas",
     "medidas_drasticas": "medidasDrasticas",
     "comparacion": "comparar_reporte_infra",
+    "deteccion_de_accesos":"detectar_accesos_criticos",
 }
 
 
