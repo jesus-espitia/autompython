@@ -1,166 +1,189 @@
+import pandas as pd
 import os
 import re
-import pandas as pd
 from datetime import datetime
 
 def TopINCMensuales():
     try:
-        print("📊 Generador de Reporte Mensual de Incidentes\n")
+        print("📊 Ejecutando análisis TOP mensual de incidentes...\n")
 
-        # ---------- RUTAS ----------
+        # ---------- PEDIR MES Y AÑO ----------
+        mes = int(input("📅 Ingresa el MES (1-12): "))
+        anio = int(input("📅 Ingresa el AÑO (YYYY): "))
+
+        # ---------- RUTAS RELATIVAS ----------
         base_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(base_dir, "..", ".."))
 
-        txt_dir = os.path.join(project_root, "Ruta-TXT", "ReportePasado")
-        excel_dir = os.path.join(project_root, "Excel")
-        excel_inv = os.path.join(project_root, "Excel", "ARCHIVOS_ALIMENTADORES_INFRA_AD")
+        csv_dir = os.path.join(project_root, "Ruta-CSV", "CSVPasado")
+        excel_out_dir = os.path.join(project_root, "Excel")
+        inventarios_dir = os.path.join(project_root, "Excel", "ARCHIVOS_ALIMENTADORES_INFRA_AD")
 
-        infra_file = os.path.join(excel_inv, "INVENTARIO_INFRA_beta.xlsx")
-        ad_file = os.path.join(excel_inv, "INVENTARIO_AD_beta.xlsx")
+        infra_file = os.path.join(inventarios_dir, "INVENTARIO_INFRA_beta.xlsx")
+        ad_file = os.path.join(inventarios_dir, "INVENTARIO_AD_beta.xlsx")
 
-        # ---------- INPUT MES / AÑO ----------
-        mes = input("📅 Ingresa el mes (1-12): ").strip()
-        anio = input("📅 Ingresa el año (YYYY): ").strip()
-
-        if not mes.isdigit() or not (1 <= int(mes) <= 12):
-            print("❌ Mes inválido.")
-            return
-
-        if not anio.isdigit() or len(anio) != 4:
-            print("❌ Año inválido.")
-            return
-
-        mes = mes.zfill(2)
-
-        print(f"\n🔍 Procesando reportes de {mes}-{anio}\n")
-
-        # ---------- CARGAR INVENTARIOS ----------
-        def cargar_inv(path):
+        # ---------- INVENTARIOS ----------
+        def cargar_inventario(path):
             if not os.path.exists(path):
                 return pd.DataFrame()
-
             df = pd.read_excel(path)
             df.columns = [c.strip().lower() for c in df.columns]
             df = df[df.iloc[:, 0].notna()]
             df.iloc[:, 0] = df.iloc[:, 0].astype(str).str.upper().str.strip()
             return df
 
-        infra_inv = cargar_inv(infra_file)
-        ad_inv = cargar_inv(ad_file)
+        infra_inv = cargar_inventario(infra_file)
+        ad_inv = cargar_inventario(ad_file)
 
-        # ---------- DETECTAR COLUMNA UBICACIÓN ----------
-        def detectar_columna(df):
-            for col in df.columns:
-                if "ubicacion" in col:
-                    return col
-            return None
+        # ---------- COLUMNAS ----------
+        col_id = "mostrar id"
+        col_ticket = "external system ticket"
+        col_resumen = "resumen"
 
-        col_ubi_infra = detectar_columna(infra_inv)
-        col_ubi_ad = detectar_columna(ad_inv)
+        acumulado = []
 
-        # ---------- FILTRAR TXT ----------
-        archivos = [
-            f for f in os.listdir(txt_dir)
-            if f.startswith("Reporte_Incidentes_")
-            and f.endswith(".txt")
-            and f[-8:-4] == anio
-            and f[-11:-9] == mes
-        ]
+        archivos = sorted([f for f in os.listdir(csv_dir) if f.endswith(".csv")])
 
         if not archivos:
-            print("❌ No se encontraron reportes para ese mes/año.")
+            print("❌ No hay CSV en CSVPasado")
             return
 
-        registros = []
-
-        # ---------- LEER TXT ----------
+        # ---------- RECORRER CSV ----------
         for archivo in archivos:
-            path = os.path.join(txt_dir, archivo)
-            fecha_txt = archivo.replace("Reporte_Incidentes_", "").replace(".txt", "")
-            fecha_reporte = datetime.strptime(fecha_txt, "%d-%m-%Y").date()
+            match = re.match(r"(\d{4})-(\d{2})-(\d{2})", archivo)
+            if not match:
+                continue
 
-            with open(path, "r", encoding="utf-8") as f:
-                lineas = f.readlines()
+            file_year = int(match.group(1))
+            file_month = int(match.group(2))
+            file_date = f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
 
-            doliente = ""
+            if file_year != anio or file_month != mes:
+                continue
 
-            for linea in lineas:
-                linea = linea.strip()
+            print(f"📂 Procesando: {archivo}")
 
-                if linea.startswith("Doliente:"):
-                    doliente = linea.replace("Doliente:", "").replace("[", "").strip()
+            path = os.path.join(csv_dir, archivo)
+            try:
+                df = pd.read_csv(path, encoding="utf-8", low_memory=False)
+            except:
+                continue
 
-                match = re.match(r"\d+\.\s+([A-Z0-9_]+)", linea)
-                if match:
-                    servidor = match.group(1)
+            df.columns = [re.sub(r"\s+", " ", c).strip().lower() for c in df.columns]
 
-                    tipo = ""
-                    casos = 0
-                    detalles = ""
+            if not all(c in df.columns for c in [col_id, col_ticket]):
+                continue
 
-                    tipo_match = re.search(r"\(([^)]*)\)", linea)
-                    if tipo_match:
-                        tipo = tipo_match.group(1)
+            df = df[df[col_id].astype(str).str.startswith("INC")]
+            df = df[df[col_ticket].notna()]
 
-                    casos_match = re.search(r":\s*(\d+)\s+casos", linea)
-                    if casos_match:
-                        casos = int(casos_match.group(1))
+            df[col_ticket] = df[col_ticket].astype(str).str.upper().str.strip()
+            df["fecha_reporte"] = file_date
 
-                    detalle_match = re.findall(r"\((.*?)\)", linea)
-                    if len(detalle_match) > 1:
-                        raw = detalle_match[1]
-                        raw = re.sub(r"Solarwinds\s*\d+\s*-\s*", "", raw)
-                        detalles = ", ".join(sorted(set(x.strip() for x in raw.split(",") if x.strip())))
+            acumulado.append(df[[col_ticket, col_resumen, "fecha_reporte"]])
 
-                    registros.append({
-                        "FechaReporte": fecha_reporte,
-                        "Año": int(anio),
-                        "Mes": mes,
-                        "Doliente": doliente,
-                        "Servidor": servidor,
-                        "Tipo": tipo,
-                        "Casos": casos,
-                        "Detalles": detalles
-                    })
+        if not acumulado:
+            print("❌ No hay datos para ese mes/año")
+            return
 
-        df = pd.DataFrame(registros)
+        df_final = pd.concat(acumulado, ignore_index=True)
 
-        # ---------- ACUMULAR CASOS ----------
-        df = df.groupby(
-            ["Año", "Mes", "Doliente", "Servidor", "Tipo"],
-            as_index=False
-        ).agg({
-            "Casos": "sum",
-            "Detalles": lambda x: ", ".join(sorted(set(filter(None, x))))
-        })
+        # ---------- FUNCIÓN LIMPIAR RESUMEN ----------
+        def resumir_eventos(lista_resumen):
+            patrones = [
+                "server down",
+                "high memory",
+                "high cpu",
+                "disk",
+                "unreachable",
+                "not responding",
+                "service down"
+            ]
 
-        # ---------- UBICACIÓN SEGURA ----------
-        def obtener_ubicacion(server):
-            if not infra_inv.empty and server in infra_inv.iloc[:, 0].values and col_ubi_infra:
-                val = infra_inv.loc[infra_inv.iloc[:, 0] == server, col_ubi_infra]
-                return val.values[0] if not val.empty else ""
+            encontrados = set()
 
-            if not ad_inv.empty and server in ad_inv.iloc[:, 0].values and col_ubi_ad:
-                val = ad_inv.loc[ad_inv.iloc[:, 0] == server, col_ubi_ad]
-                return val.values[0] if not val.empty else ""
+            for r in lista_resumen:
+                if not isinstance(r, str):
+                    continue
 
-            return ""
+                texto = r.lower()
+                texto = re.sub(r"solarwinds.*?-", "", texto)
+                texto = re.sub(r"\d+", "", texto)
 
-        df["Ubicacion"] = df["Servidor"].apply(obtener_ubicacion)
+                for p in patrones:
+                    if p in texto:
+                        encontrados.add(p.title())
 
-        # ---------- EXPORTAR EXCEL ----------
-        os.makedirs(excel_dir, exist_ok=True)
+            if not encontrados:
+                return "Evento recurrente"
 
-        fecha_hoy = datetime.now().strftime("%Y-%m-%d")
-        salida = os.path.join(
-            excel_dir,
-            f"Reporte_Mensual_Incidentes_{fecha_hoy}.xlsx"
+            return " | ".join(sorted(encontrados))
+
+        # ---------- AGRUPAR ----------
+        filas = []
+
+        for hostname, grupo in df_final.groupby(col_ticket):
+            casos = len(grupo)
+            fecha_reporte = grupo["fecha_reporte"].iloc[0]
+
+            detalle = resumir_eventos(grupo[col_resumen].dropna().tolist())
+
+            doliente = "OTROS"
+            tipo = ""
+            ubicacion = ""
+
+            if not infra_inv.empty and hostname in infra_inv.iloc[:, 0].values:
+                fila = infra_inv[infra_inv.iloc[:, 0] == hostname].iloc[0]
+                doliente = "Microsoft Infra"
+                tipo = fila.get("tipo_server", "")
+                ubicacion = fila.get("ubicacion", "")
+
+            elif not ad_inv.empty and hostname in ad_inv.iloc[:, 0].values:
+                fila = ad_inv[ad_inv.iloc[:, 0] == hostname].iloc[0]
+                doliente = "Microsoft AD"
+                tipo = fila.get("tipo_server", "")
+                ubicacion = fila.get("ubicacion", "")
+
+            filas.append([
+                fecha_reporte,
+                doliente,
+                hostname,
+                tipo,
+                casos,
+                detalle,
+                ubicacion
+            ])
+
+        df_reporte = pd.DataFrame(
+            filas,
+            columns=[
+                "Fecha reporte",
+                "Doliente",
+                "Servidor",
+                "Tipo",
+                "Cantidad Incidentes",
+                "Detalle",
+                "Ubicación"
+            ]
         )
 
-        df.to_excel(salida, index=False)
+        df_reporte.sort_values(
+            by=["Doliente", "Cantidad Incidentes"],
+            ascending=[True, False],
+            inplace=True
+        )
 
-        print("📈 Reporte mensual generado correctamente:")
-        print(salida)
+        os.makedirs(excel_out_dir, exist_ok=True)
+
+        out_file = os.path.join(
+            excel_out_dir,
+            f"TOP_INCIDENTES_{anio}_{mes:02d}.xlsx"
+        )
+
+        df_reporte.to_excel(out_file, index=False)
+
+        print(f"\n✅ Reporte mensual generado correctamente:")
+        print(f"📄 {out_file}\n")
 
     except Exception as e:
-        print(f"❌ Error en TopINC_Mensuales: {e}")
+        print(f"❌ Error ejecutando TopINCMensuales: {e}")
