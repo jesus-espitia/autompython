@@ -1,9 +1,10 @@
 import pandas as pd
 import os
 
-def Info_Servers():
+def InfoServers():
     try:
-        print("🔍 Consulta de información de servidor\n")
+        print("🔍 Consulta interactiva de servidores")
+        print("✏️ Escribe el nombre del servidor o 'SALIR' para terminar\n")
 
         base_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(base_dir, "..", ".."))
@@ -13,7 +14,7 @@ def Info_Servers():
         infra_file = os.path.join(excel_dir, "INVENTARIO_INFRA_beta.xlsx")
         ad_file = os.path.join(excel_dir, "INVENTARIO_AD_beta.xlsx")
 
-        # ---------- CARGAR INVENTARIO ----------
+        # ---------- CARGAR INVENTARIOS ----------
         def cargar_inventario(path):
             if not os.path.exists(path):
                 return pd.DataFrame()
@@ -27,13 +28,9 @@ def Info_Servers():
         infra_inv = cargar_inventario(infra_file)
         ad_inv = cargar_inventario(ad_file)
 
-        server = input("🖥️ Escribe el nombre del servidor: ").strip().upper()
-        print()
-
-        encontrado = False
-
+        # ---------- FUNCIÓN PARA MOSTRAR INFO ----------
         def mostrar_info(fila):
-            print(f"🖥️ Nombre Servidor: {fila.iloc[0]}")
+            print(f"\n 🖥️ Nombre Servidor: {fila.iloc[0]}")
 
             if fila.get("direccion ip"):
                 print(f"🌐 Dirección IP: {fila['direccion ip']}")
@@ -53,22 +50,32 @@ def Info_Servers():
             if fila.get("ubicacion"):
                 print(f"📍 Ubicación: {fila['ubicacion']}")
 
-        # ---------- BUSCAR EN INFRA ----------
-        if not infra_inv.empty and server in infra_inv.iloc[:, 0].values:
-            fila = infra_inv[infra_inv.iloc[:, 0] == server].iloc[0]
-            print("📂 Inventario: Microsoft Infra\n")
-            mostrar_info(fila)
-            encontrado = True
+        # ---------- BUCLE PRINCIPAL ----------
+        while True:
+            server = input("\n 🖥️ Escribe el nombre del servidor o Salir: ").strip().upper()
 
-        # ---------- BUSCAR EN AD ----------
-        if not ad_inv.empty and server in ad_inv.iloc[:, 0].values:
-            fila = ad_inv[ad_inv.iloc[:, 0] == server].iloc[0]
-            print("\n📂 Inventario: Microsoft AD\n")
-            mostrar_info(fila)
-            encontrado = True
+            if server == "SALIR":
+                print("\n👋 Saliendo de la consulta de servidores.")
+                break
 
-        if not encontrado:
-            print("❌ Servidor no encontrado en los inventarios.")
+            encontrado = False
+
+            # Buscar en Infra
+            if not infra_inv.empty and server in infra_inv.iloc[:, 0].values:
+                fila = infra_inv[infra_inv.iloc[:, 0] == server].iloc[0]
+                print("\n📂 Inventario: Microsoft Infra")
+                mostrar_info(fila)
+                encontrado = True
+
+            # Buscar en AD
+            if not ad_inv.empty and server in ad_inv.iloc[:, 0].values:
+                fila = ad_inv[ad_inv.iloc[:, 0] == server].iloc[0]
+                print("\n📂 Inventario: Microsoft AD")
+                mostrar_info(fila)
+                encontrado = True
+
+            if not encontrado:
+                print("\n❌ Servidor no encontrado en los inventarios.")
 
     except Exception as e:
         print(f"❌ Error ejecutando Info_Servers: {e}")

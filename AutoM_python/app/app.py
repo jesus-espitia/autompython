@@ -24,6 +24,8 @@ FUNCIONES_PRINCIPALES = {
     "DescripcionINC": "descripcion_inc",
     "Comparacion": "comparar_reporte_infra",
     "Deteccion_de_accesos":"detectar_accesos_criticos",
+    "Info_servers":"InfoServers",
+    "TopINC_Mensuales":"TopINCMensuales",
 }
 
 
@@ -81,7 +83,7 @@ def limpiar_cache_pyc_mensual():
     """
     try:
         hoy = datetime.now()
-        if hoy.day < 15:
+        if hoy.day <= 4:
             return
 
         base_dir = os.path.dirname(__file__)
