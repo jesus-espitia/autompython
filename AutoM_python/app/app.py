@@ -19,11 +19,11 @@ if BASE_DIR not in sys.path:
 
 # Mapa de módulos y funciones a ejecutar
 FUNCIONES_PRINCIPALES = {
-    "top5_incidentes": "topDeInicidentes",
+    "Top5_semanales": "topDeInicidentes",
     "Formato_Fechas_Horas": "separar_fecha_hora_columnas_dinamicas",
-    "medidas_drasticas": "medidasDrasticas",
-    "comparacion": "comparar_reporte_infra",
-    "deteccion_de_accesos":"detectar_accesos_criticos",
+    "DescripcionINC": "descripcion_inc",
+    "Comparacion": "comparar_reporte_infra",
+    "Deteccion_de_accesos":"detectar_accesos_criticos",
 }
 
 
