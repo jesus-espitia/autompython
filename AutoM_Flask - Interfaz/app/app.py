@@ -5,6 +5,8 @@ from routes.Top5_semanales import topDeInicidentes
 from routes.descripcion_inc import descripcion_inc
 from routes.comparar_infra import comparar_bp
 from routes.accesos_criticos import accesos_b
+from routes.formato_fecha_hora import formato_bp 
+
 
 app = Flask(__name__)
 
@@ -77,6 +79,11 @@ def comparar():
 def accesos():
     return render_template("accesos_criticos.html")
 
+
+app.register_blueprint(formato_bp)
+@app.route("/formato")
+def formato():
+    return render_template("formato_fecha_hora.html")
 # ==============================
 # EJECUCIÓN
 # ==============================

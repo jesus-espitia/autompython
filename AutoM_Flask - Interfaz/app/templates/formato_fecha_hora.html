@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Separar Fecha y Hora</title>
+</head>
+
+<body>
+
+    <h2>🧩 Separar Fecha y Hora</h2>
+
+    <input type="file" id="archivo"><br><br>
+
+    <button onclick="cargarColumnas()">Cargar columnas</button><br><br>
+
+    <select id="columnas"></select><br><br>
+
+    <button onclick="ejecutar()">Ejecutar análisis</button><br><br>
+
+    <button id="btnDescargar" onclick="descargar()" style="display:none">
+        Descargar XLSX
+    </button>
+
+    <hr>
+
+    <div id="resultado">Esperando análisis...</div>
+
+    <script src="{{ url_for('static', filename='js/formato_fecha_hora.js') }}"></script>
+</body>
+
+</html>
