@@ -1,0 +1,229 @@
+/* =========================================
+   VARIABLES (Misma Escala de Azules)
+   ========================================= */
+:root {
+    --primary-strong: #0D47A1;    /* Texto oscuro y botones principales */
+    --primary-dark: #1565C0;      /* Fondo de elementos activos */
+    --primary-medium: #1976D2;    /* Bordes y detalles */
+    --primary-light: #64B5F6;     /* Acentos */
+    
+    --pastel-bg: #E3F2FD;         /* Fondo página */
+    --white: #FFFFFF;
+    
+    --shadow: 0 4px 12px rgba(13, 71, 161, 0.1);
+    --radius: 8px;
+}
+
+/* =========================================
+   LAYOUT Y RESET
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--pastel-bg);
+    color: var(--primary-strong);
+    min-height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Ocultar los <br> para usar espaciado CSS */
+br {
+    display: none;
+}
+
+/* =========================================
+   TITULO
+   ========================================= */
+h2 {
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* =========================================
+   INPUT FILE
+   ========================================= */
+#archivo {
+    width: 100%;
+    padding: 1rem;
+    border: 2px dashed var(--primary-light);
+    background-color: var(--white);
+    border-radius: var(--radius);
+    color: var(--primary-strong);
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+#archivo:hover {
+    border-color: var(--primary-medium);
+    background-color: #F0F7FF;
+}
+
+/* =========================================
+   SELECT
+   ========================================= */
+#columnas {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #BBDEFB;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    color: var(--primary-strong);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+#columnas:focus {
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+}
+
+/* =========================================
+   BOTONES
+   ========================================= */
+button {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem; /* Espacio entre botones */
+}
+
+/* Botón 1: Cargar columnas (Secundario) */
+button:first-of-type {
+    background-color: var(--white);
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-medium);
+}
+
+button:first-of-type:hover {
+    background-color: var(--primary-medium);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Botón 2: Ejecutar análisis (Primario) */
+button:nth-of-type(2) {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    box-shadow: 0 4px 6px rgba(21, 101, 192, 0.3);
+}
+
+button:nth-of-type(2):hover {
+    background-color: var(--primary-strong);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(21, 101, 192, 0.4);
+}
+
+/* Botón 3: Descargar (Acción de éxito) */
+/* Nota: El HTML tiene display:none, esto aplica cuando JS lo muestra */
+#btnDescargar {
+    background-color: var(--primary-medium);
+    color: var(--white);
+    display: block; /* Asegura que sea bloque cuando se muestre */
+    border-left: 5px solid var(--primary-strong);
+}
+
+#btnDescargar:hover {
+    background-color: var(--primary-dark);
+}
+
+/* =========================================
+   SEPARADOR
+   ========================================= */
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(13, 71, 161, 0), rgba(21, 101, 192, 0.5), rgba(13, 71, 161, 0));
+    margin: 2rem 0;
+    width: 100%;
+}
+
+/* =========================================
+   RESULTADO Y TABLAS
+   ========================================= */
+#resultado {
+    width: 100%;
+    background-color: var(--white);
+    border: 1px solid #BBDEFB;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    min-height: 100px;
+    color: #333;
+    overflow-x: auto; /* Permite scroll si la tabla es muy ancha */
+    box-shadow: var(--shadow);
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+/* Estilos para tablas que JS pueda inyectar en el div */
+#resultado table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+#resultado th {
+    background-color: var(--pastel-bg);
+    color: var(--primary-strong);
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 2px solid var(--primary-medium);
+    font-weight: 700;
+}
+
+#resultado td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #E3F2FD;
+    color: #444;
+}
+
+/* Filas alternas */
+#resultado tr:nth-child(even) {
+    background-color: #F8FBFF;
+}
+
+/* Efecto hover en filas */
+#resultado tr:hover {
+    background-color: #E3F2FD;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    #resultado, #resultado th, #resultado td {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+}

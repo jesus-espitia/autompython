@@ -7,16 +7,19 @@
 </head>
 <body>
 
-    <h1>¿Qué deseas hacer hoy?</h1>
+<h1>¿Qué deseas hacer hoy?</h1>
 
-    <ul>
-        {% for modulo in modulos %}
-            <li>{{ modulo }}</li>
-        {% else %}
-            <li>No hay módulos disponibles</li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for modulo in modulos %}
+        <li>
+            <a href="{{ modulo.url }}">
+                {{ modulo.nombre }}
+            </a>
+        </li>
+    {% else %}
+        <li>No hay módulos disponibles</li>
+    {% endfor %}
+</ul>
 
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>

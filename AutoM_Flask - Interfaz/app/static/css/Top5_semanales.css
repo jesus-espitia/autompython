@@ -1,0 +1,175 @@
+/* =========================================
+   VARIABLES (Misma paleta de Azules)
+   ========================================= */
+:root {
+    --primary-strong: #0D47A1;    /* Texto oscuro, elementos primarios */
+    --primary-dark: #1565C0;      /* Fondo botones principales */
+    --primary-medium: #1976D2;   /* Bordes, hovers */
+    
+    --pastel-bg: #E3F2FD;         /* Fondo página */
+    --pastel-input: #F0F7FF;      /* Fondo inputs */
+    
+    --white: #FFFFFF;
+    --shadow: 0 4px 12px rgba(13, 71, 161, 0.1);
+    --radius: 10px;
+}
+
+/* =========================================
+   RESET Y LAYOUT GENERAL
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--pastel-bg);
+    color: var(--primary-strong);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+/* Contenedor principal para centrar el contenido y limitar ancho */
+body > * {
+    width: 100%;
+    max-width: 800px; /* Límite de lectura cómodo */
+}
+
+/* =========================================
+   TITULO
+   ========================================= */
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-dark);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* =========================================
+   FORMULARIO (Carga de Archivos)
+   ========================================= */
+form {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espacio entre input y botón */
+    align-items: center;
+}
+
+/* Estilo del Input File */
+input[type="file"] {
+    width: 100%;
+    padding: 1rem;
+    border: 2px dashed var(--primary-medium);
+    background-color: var(--pastel-input);
+    border-radius: var(--radius);
+    color: var(--primary-strong);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+/* Efecto al pasar el mouse sobre el input */
+input[type="file"]:hover {
+    background-color: #D1E9FF;
+    border-color: var(--primary-dark);
+}
+
+/* =========================================
+   BOTONES
+   ========================================= */
+
+/* Botón Principal: Ejecutar análisis (Dentro del form) */
+button[type="submit"] {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    width: 100%; /* Full width en móviles */
+}
+
+button[type="submit"]:hover {
+    background-color: var(--primary-strong);
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Botón Secundario: Aplicar descripción (Fuera del form) */
+#btnDescripcion {
+    background-color: var(--white); /* Fondo blanco */
+    color: var(--primary-dark);     /* Texto azul */
+    border: 2px solid var(--primary-dark); /* Borde sólido */
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+#btnDescripcion:hover {
+    background-color: var(--primary-dark);
+    color: var(--white);
+}
+
+/* =========================================
+   AREA DE REPORTE (TEXTAREA)
+   ========================================= */
+#reporte {
+    width: 100%;
+    min-height: 400px; /* Altura mínima para ver resultados */
+    padding: 1.5rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Fuente estilo código */
+    font-size: 0.95rem;
+    color: #333;
+    background-color: var(--white);
+    border: 1px solid #BBDEFB; /* Borde azul muy suave */
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    resize: vertical; /* Permite agrandar verticalmente si el usuario quiere */
+    outline: none;
+    line-height: 1.5;
+}
+
+/* Estado focus del textarea */
+#reporte:focus {
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.1);
+}
+
+/* =========================================
+   RESPONSIVE (Ajustes móviles)
+   ========================================= */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    form, #reporte {
+        padding: 1.2rem;
+    }
+
+    button[type="submit"], #btnDescripcion {
+        width: 100%; /* Asegura que los botones ocupen todo el ancho en móvil */
+    }
+}
