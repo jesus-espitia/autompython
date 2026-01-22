@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 5 Incidentes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<h1>Top 5 de Incidentes</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="archivo_csv" accept=".csv,.xlsx,.xls" required>
+    <button type="submit">Ejecutar análisis</button>
+</form>
+
+<button id="btnDescripcion">Aplicar descripción INC</button>
+
+<textarea id="reporte" readonly>{{ reporte }}</textarea>
+
+<script src="{{ url_for('static', filename='js/top5.js') }}"></script>
+</body>
+</html>

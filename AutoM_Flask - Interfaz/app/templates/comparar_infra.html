@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparar Infra / AD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+<body>
+
+<h2>🔍 Comparar Infra / AD</h2>
+
+<input type="file" id="archivo">
+<br><br>
+
+<button id="btnColumnas">Recolectar columnas</button>
+<br><br>
+
+<select id="columnas" disabled></select>
+<br><br>
+
+<label>
+    <input type="checkbox" id="guardar">
+    Guardar archivo subido
+</label>
+
+<br><br>
+
+<button id="btnEjecutar" disabled>Ejecutar comparación</button>
+
+<br><br>
+<textarea id="resultado" rows="22" readonly></textarea>
+
+<script src="{{ url_for('static', filename='js/comparar_infra.js') }}"></script>
+</body>
+</html>

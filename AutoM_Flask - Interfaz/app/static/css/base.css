@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.bloque {
+    margin-bottom: 15px;
+}
+
+select, button {
+    padding: 6px;
+    width: 300px;
+}
+
+textarea {
+    width: 100%;
+    font-family: Consolas, monospace;
+    padding: 10px;
+}
