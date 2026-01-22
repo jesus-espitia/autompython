@@ -3,7 +3,8 @@ import os
 
 from routes.Top5_semanales import topDeInicidentes
 from routes.descripcion_inc import descripcion_inc
-from routes.comparar_infra import comparar_bp   # 👈 IMPORTANTE
+from routes.comparar_infra import comparar_bp
+from routes.accesos_criticos import accesos_b
 
 app = Flask(__name__)
 
@@ -13,7 +14,8 @@ RUTA_MODULOS = os.path.join(BASE_DIR, "routes")
 # ==============================
 # REGISTRAR BLUEPRINTS
 # ==============================
-app.register_blueprint(comparar_bp)  # 👈 ESTO FALTABA
+app.register_blueprint(comparar_bp)
+app.register_blueprint(accesos_b)
 
 # ==============================
 # LISTAR MÓDULOS
@@ -62,11 +64,21 @@ def aplicar_descripcion():
     return descripcion_inc(texto)
 
 # ==============================
-# COMPARAR
+# COMPARAR INFRA / AD
 # ==============================
 @app.route("/comparar")
 def comparar():
     return render_template("comparar_infra.html")
 
+# ==============================
+# ACCESOS CRÍTICOS
+# ==============================
+@app.route("/accesos")
+def accesos():
+    return render_template("accesos_criticos.html")
+
+# ==============================
+# EJECUCIÓN
+# ==============================
 if __name__ == "__main__":
     app.run(debug=True)

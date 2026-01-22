@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Accesos Críticos</title>
+
+    <!-- JS CORRECTO -->
+    <script defer src="{{ url_for('static', filename='js/accesos_criticos.js') }}"></script>
+
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { margin-top: 10px; }
+        select, input { width: 300px; padding: 5px; }
+        pre { background: #f4f4f4; padding: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>🔍 Detección de Accesos Críticos</h2>
+
+<!-- SUBIR ARCHIVO -->
+<input type="file" id="archivo"><br>
+<button type="button" onclick="cargarColumnas()">Recolectar columnas</button>
+
+<hr>
+
+<!-- COLUMNAS -->
+<label>Columna a analizar:</label><br>
+<select id="columnas"></select>
+
+<hr>
+
+<!-- GUARDAR -->
+<label>
+    <input type="checkbox" id="guardar">
+    Guardar archivo original
+</label>
+
+<br><br>
+<button type="button" onclick="ejecutar()">Ejecutar análisis</button>
+
+<hr>
+
+<h3>Resultado</h3>
+<pre id="resultado">Esperando ejecución...</pre>
+
+</body>
+</html>
