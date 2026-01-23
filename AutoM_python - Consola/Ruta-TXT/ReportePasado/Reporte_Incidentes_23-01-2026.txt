@@ -1,0 +1,22 @@
+23/01/2026
+
+Se realiza análisis del TOP 5 de los servidores con más incidentes entre 16/01/2026 y 23/01/2026:
+
+
+Doliente: Microsoft Infra [
+	01. PACSPOB-HOST_IATM (IATM): 4 casos (Solarwinds 1530174 - Server - High CPU usage, Solarwinds 1530291 - Server - High CPU usage, Solarwinds 1526664 - Server - High CPU usage, Solarwinds 1527481 - Server - High CPU usage)
+	NOTA: IATM Dinamica La 80 
+
+	02. DNMCRPS01 (PACS): 3 casos (Solarwinds 1526951 - Server - Server down, Solarwinds 1526582 - Server - Server down, Solarwinds 1526564 - Server - Server down)
+	NOTA: Ay DX SURA Carepa 
+
+	03. DNMDHV24 (PACS): 2 casos (Solarwinds 1530094 - Server - Server down, Solarwinds 1528127 - Server - Server down)
+	NOTA: Ay Dx Sura El Tesoro 
+
+	04. DNCRHV01 (PACS): 2 casos (Solarwinds 1526592 - Server - Server down, Solarwinds 1526563 - Server - Server down)
+	NOTA: Ay DX SURA Carepa 
+
+	05. ERIS_DB_IATM (IATM): 2 casos (Solarwinds 1527817 - Server - Server down, Solarwinds 1527741 - Synthetic - Website down)
+	NOTA: IATM Dinamica La 80 
+
+]
