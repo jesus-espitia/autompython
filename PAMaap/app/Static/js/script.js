@@ -34,9 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 sidebar.classList.remove('active');
             }
 
-            // LÓGICA DE NAVEGACIÓN:
-            // Si el href es "#" (enlace falso), prevenimos la recarga.
-            // Si es un archivo real (ej: mi_ficha.html), dejamos que el navegador navegue naturalmente.
             if (href === '#' || href === '' || href === 'javascript:void(0)') {
                 e.preventDefault();
             }
@@ -50,8 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 5. Marcar automáticamente el menú activo según la URL actual
-    // Esto hace que no tengas que cambiar la clase 'active' manualmente en cada archivo HTML
+
     function setActivePage() {
         // Obtenemos el nombre del archivo actual (ej: "mi_ficha.html" o "/")
         const currentPage = window.location.pathname.split('/').pop();

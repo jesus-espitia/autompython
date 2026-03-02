@@ -1,0 +1,41 @@
+.header-user {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #0f0f0f;
+    border: 1px solid #252525;
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 140px;
+    z-index: 1000;
+}
+
+.user-dropdown a {
+    display: block;
+    padding: 8px 16px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.user-dropdown a:hover {
+    background-color: #252525;
+}
+
+.logout { 
+    background: hsl(61, 94%, 47%);
+    border: 1px solid hsl(0, 0%, 0%);
+    border-radius: 8px;
+    padding: 8px 0;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #0f0f0f;
+}

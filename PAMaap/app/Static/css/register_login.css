@@ -1,0 +1,173 @@
+
+/* ===========================================
+   ESTILOS DE AUTENTICACIÓN (LOGIN / REGISTER / VERIFY)
+   Basado en el estilo PAMaap observado
+   =========================================== */
+
+/* Variables (Mismas que el estilo base) */
+:root {
+    --bg-body: #050505;
+    --bg-card: #141414;
+    --bg-input: #1a1a1a;
+    
+    --text-main: #ffffff;
+    --text-secondary: #a0a0a0;
+    --text-muted: #5a5a5a;
+
+    --accent-yellow: #ffd000;
+    --border-color: #252525;
+    
+    --error-red: #ff4d4d;
+}
+
+/* Reset y Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    min-height: 100vh;
+    
+    /* Centrar todo el contenido vertical y horizontalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Ocultar los saltos de línea forzados del HTML original 
+   (Usaremos margenes de CSS para un espaciado limpio) */
+br {
+    display: none;
+}
+
+/* Título Principal */
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Texto descriptivo bajo el título (ej. Verify) */
+body > p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 14px;
+    max-width: 350px;
+}
+
+/* ===========================================
+   TARJETA / FORMULARIO
+   =========================================== */
+form {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 32px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+/* Campos de Entrada */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--text-main);
+    font-size: 15px;
+    margin-bottom: 20px; /* Espaciado entre campos */
+    transition: border-color 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-yellow);
+}
+
+/* Placeholder */
+input::placeholder {
+    color: var(--text-muted);
+}
+
+/* ===========================================
+   BOTONES
+   =========================================== */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-yellow);
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-top: 10px; /* Un poco de aire sobre el botón */
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* ===========================================
+   ENLACES Y MENSAJES
+   =========================================== */
+
+/* Texto inferior ("¿No tienes cuenta?") */
+form + p {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+a {
+    color: var(--accent-yellow);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mensajes de Error */
+p[style*="color:red"] {
+    /* Sobrescribimos el estilo inline para que se vea mejor */
+    color: var(--error-red) !important; 
+    background-color: rgba(255, 77, 77, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 15px;
+    border: 1px solid rgba(255, 77, 77, 0.2);
+}
