@@ -1,10 +1,4 @@
 
-/* ===========================================
-   ESTILOS DE AUTENTICACIÓN (LOGIN / REGISTER / VERIFY)
-   Basado en el estilo PAMaap observado
-   =========================================== */
-
-/* Variables (Mismas que el estilo base) */
 :root {
     --bg-body: #050505;
     --bg-card: #141414;
@@ -32,8 +26,6 @@ body {
     background-color: var(--bg-body);
     color: var(--text-main);
     min-height: 100vh;
-    
-    /* Centrar todo el contenido vertical y horizontalmente */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,8 +33,6 @@ body {
     padding: 20px;
 }
 
-/* Ocultar los saltos de línea forzados del HTML original 
-   (Usaremos margenes de CSS para un espaciado limpio) */
 br {
     display: none;
 }
@@ -55,7 +45,6 @@ h2 {
     text-align: center;
 }
 
-/* Texto descriptivo bajo el título (ej. Verify) */
 body > p {
     color: var(--text-secondary);
     margin-bottom: 30px;
@@ -97,7 +86,7 @@ input[type="text"] {
     padding: 12px 16px;
     color: var(--text-main);
     font-size: 15px;
-    margin-bottom: 20px; /* Espaciado entre campos */
+    margin-bottom: 20px; 
     transition: border-color 0.2s ease;
 }
 
@@ -125,7 +114,7 @@ button {
     font-weight: 700;
     cursor: pointer;
     transition: opacity 0.2s, transform 0.1s;
-    margin-top: 10px; /* Un poco de aire sobre el botón */
+    margin-top: 10px; 
 }
 
 button:hover {
@@ -140,7 +129,6 @@ button:active {
    ENLACES Y MENSAJES
    =========================================== */
 
-/* Texto inferior ("¿No tienes cuenta?") */
 form + p {
     margin-top: 24px;
     font-size: 14px;
@@ -161,7 +149,6 @@ a:hover {
 
 /* Mensajes de Error */
 p[style*="color:red"] {
-    /* Sobrescribimos el estilo inline para que se vea mejor */
     color: var(--error-red) !important; 
     background-color: rgba(255, 77, 77, 0.1);
     padding: 10px;

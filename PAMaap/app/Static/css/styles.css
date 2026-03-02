@@ -725,15 +725,13 @@ input:checked+.slider:before {
 
     .search-box {
         display: none;
-        /* Ocultar búsqueda en móvil para ahorrar espacio */
     }
 
     .header-user span {
         display: none;
-        /* Ocultar nombre en móvil, mostrar solo avatar */
     }
 
-    /* Ajustes específicos para páginas en móvil */
+
     .profile-card,
     .settings-section {
         padding: 20px;
