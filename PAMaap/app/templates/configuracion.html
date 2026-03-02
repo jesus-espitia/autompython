@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Portal</title>
+    <link rel="stylesheet" href="../Static/css/styles.css">
+</head>
+<body>
+
+    <!-- Barra Lateral (Sidebar) -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+                </svg>
+            </div>
+            <span class="logo-text">PAMaap</span>
+        </div>
+
+        <div class="user-section">
+            <div class="user-avatar">JM</div>
+            <div class="user-info">
+                <span class="user-name">Jesus Manuel Espitia</span>
+                <span class="user-role">Usuario Activo</span>
+            </div>
+        </div>
+
+        <nav class="nav-section">
+            <span class="nav-label">Menu Principal</span>
+            
+            <a href="/" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="9" rx="1"/>
+                    <rect x="14" y="3" width="7" height="5" rx="1"/>
+                    <rect x="14" y="12" width="7" height="9" rx="1"/>
+                    <rect x="3" y="16" width="7" height="5" rx="1"/>
+                </svg>
+                <span>Portal</span>
+            </a>
+
+            <a href="/mi_ficha" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span>Mi ficha</span>
+            </a>
+
+
+
+            <a href="/documentos" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <span>Documentos</span>
+            </a>
+
+            <!-- Active en esta página -->
+            <a href="/configuracion" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <span>Configuracion</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content" id="mainContent">
+        
+        <!-- Encabezado Superior -->
+        <header class="header">
+            <button class="toggle-btn" id="toggleBtn" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+
+            <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" placeholder="Buscar en el portal...">
+            </div>
+
+            <div class="header-right">
+                <button class="header-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-dot"></span>
+                </button>
+                
+                <div class="header-user">
+                    <div class="header-user-avatar">JM</div>
+                    <span>Jesus Manuel</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Cuerpo de la Página: CONFIGURACIÓN -->
+        <div class="content-area">
+            <h1 class="page-title">Configuración</h1>
+            <p class="page-subtitle">Personaliza tu experiencia y ajustes de cuenta.</p>
+
+            <div class="settings-section">
+                <h3>Notificaciones</h3>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Alertas de Correo</span>
+                        <span class="setting-desc">Recibe notificaciones importantes en tu email.</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Notificaciones Push</span>
+                        <span class="setting-desc">Alertas en tiempo real dentro del portal.</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Seguridad</h3>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Cambiar Contraseña</span>
+                        <span class="setting-desc">Actualiza tu contraseña de acceso.</span>
+                    </div>
+                    <button class="setting-btn">Cambiar</button>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Autenticación de Dos Factores</span>
+                        <span class="setting-desc">Añade una capa extra de seguridad.</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../Static/js/script.js"></script>
+</body>
+</html>
