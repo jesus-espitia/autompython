@@ -1,3 +1,4 @@
+from routes import funciones
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 import secrets
 import os
@@ -380,7 +381,7 @@ def mi_ficha():
     return render_template("mi_ficha.html")
 
 # =========================
-#MI FICHA
+#configuracion
 # =========================
 
 @app.route("/configuracion")
@@ -389,6 +390,29 @@ def configuracion():
         return redirect(url_for("login"))
     return render_template("configuracion.html")
 
+# =========================
+#funciones
+# =========================
+
+@app.route("/funciones")
+def funcionales():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return funciones.funcion()
+    
+
+@app.route("/funcion/analisis")
+def analisis():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return funciones.F_analisis()
+
+@app.route("/funcion/reportes")
+def reportes():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return funciones.F_reportes()
+    
 # =========================
 # HOME Y LOGOUT
 # =========================

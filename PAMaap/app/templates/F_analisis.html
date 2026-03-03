@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAMaap - Home</title>
+    <title>PAMaap - Analisis</title>
     <link rel="stylesheet" href="../Static/css/styles.css">
     <link rel="icon" href="../Static/img/Logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -137,24 +137,9 @@
             </div>
         </header>
 
-        <!-- Cuerpo de la Página -->
+        
         <div class="content-area">
-            <h1 class="page-title">Bienvenido, {{ session["user"]["fullname"] }}</h1>
-            <p class="page-subtitle">Panel de control y acceso rapido a tus herramientas.</p>
-
-            <!-- Módulo de Imagen (Simulación del "img" de la captura) -->
-            <div class="image-module">
-                <div class="image-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <circle cx="8.5" cy="8.5" r="1.5" />
-                        <polyline points="21 15 16 10 5 21" />
-                    </svg>
-                    <span>img</span>
-                </div>
-            </div>
-
-
+            <!-- Cuerpo de la Página -->
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
