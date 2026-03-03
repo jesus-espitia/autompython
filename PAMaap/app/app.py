@@ -23,6 +23,7 @@ app.secret_key = app.config["SECRET_KEY"]
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER = os.path.join(PROJECT_ROOT, "archives")
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 DB_FOLDER = os.path.join(UPLOAD_FOLDER, "XLXS_IMPORT")
 DB_FILE = os.path.join(DB_FOLDER, "database.xlsx")
 
@@ -292,7 +293,7 @@ def get_user_folder():
 ALLOWED_EXTENSIONS = {
     # Documentos
     "pdf", "doc", "docx", "xls", "xlsx",
-    "ppt", "pptx", "txt",
+    "ppt", "pptx", "txt", "csv",
 
     # Imágenes
     "jpg", "jpeg", "png", "gif", "bmp", "webp"
@@ -407,11 +408,19 @@ def analisis():
         return redirect(url_for("login"))
     return funciones.F_analisis()
 
-@app.route("/funcion/reportes")
+@app.route("/funcion/reportes", methods=["GET", "POST"])
 def reportes():
     if "user" not in session:
         return redirect(url_for("login"))
     return funciones.F_reportes()
+
+@app.route("/funcion/top5", methods=["POST"])
+def top5():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return funciones.F_top5()
+    
+
     
 # =========================
 # HOME Y LOGOUT

@@ -1,0 +1,163 @@
+/* ===========================================
+   ESTILOS PARA MENU (SIDEBAR) Y TABLA
+   (Sin modificar HTML)
+   =========================================== */
+
+/* --- 1. MENU / SIDEBAR (Refuerzo de estilos) --- */
+
+/* Aseguramos que el item activo tenga el estilo correcto */
+.nav-item.active {
+    background-color: rgba(255, 208, 0, 0.1); /* Fondo amarillo tenue */
+    color: #ffd000; /* Texto amarillo */
+}
+
+.nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #ffd000; /* Barra lateral amarilla */
+    border-radius: 0 4px 4px 0;
+}
+
+/* Efecto hover general para los items del menú */
+.nav-item:hover {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+/* Ajuste para los iconos SVG dentro del menú */
+.nav-item svg {
+    flex-shrink: 0;
+}
+
+/* --- 2. FORMULARIO (Select y Botón) --- */
+/* Usamos selectores específicos para sobrescribir los estilos en línea (inline styles) */
+
+/* Estilo para el selector de archivos (Select) */
+form select[name="archivo_seleccionado"] {
+    background-color: #1a1a1a !important; /* Fondo oscuro */
+    color: #ffffff !important; /* Texto blanco */
+    border: 1px solid #252525 !important; /* Borde sutil */
+    border-radius: 8px !important;
+    padding: 12px 16px !important; /* Padding más cómodo */
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-appearance: none; /* Quitar estilo nativo */
+    appearance: none;
+    /* Añadimos una imagen de flecha personalizada con SVG */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffd000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px !important; /* Espacio para la flecha */
+}
+
+form select[name="archivo_seleccionado"]:hover {
+    border-color: #ffd000 !important;
+}
+
+/* Opciones del desplegable (funciona en algunos navegadores) */
+form select option {
+    background-color: #141414;
+    color: #ffffff;
+}
+
+/* Estilo para el botón de Analizar */
+form button[type="submit"] {
+    background-color: #ffd000 !important; /* Fondo amarillo */
+    color: #000000 !important; /* Texto negro */
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 24px !important;
+    font-weight: 700 !important;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 208, 0, 0.2);
+}
+
+form button[type="submit"]:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(255, 208, 0, 0.3);
+}
+
+/* --- 3. TABLA DE INCIDENTES --- */
+
+/* Contenedor de la tabla para scroll en móviles si es necesario */
+.Cuadricula {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 32px;
+}
+
+.tabla-incidentes {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #141414; /* Fondo tarjeta */
+    border-radius: 12px;
+    overflow: hidden; /* Para que el borde redondeado funcione */
+    border: 1px solid #252525;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezados de la tabla */
+.tabla-incidentes thead tr {
+    background-color: #0f0f0f; /* Fondo más oscuro para el head */
+}
+
+.tabla-incidentes th {
+    padding: 16px;
+    text-align: left;
+    color: #ffd000; /* Texto amarillo */
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #252525;
+}
+
+/* Cuerpo de la tabla */
+.tabla-incidentes td {
+    padding: 16px;
+    color: #e0e0e0;
+    font-size: 14px;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+/* Filas pares/impares para mejor lectura */
+.tabla-incidentes tbody tr:nth-child(even) {
+    background-color: #1a1a1a;
+}
+
+/* Efecto Hover en filas */
+.tabla-incidentes tbody tr:hover {
+    background-color: rgba(255, 208, 0, 0.05); /* Fondo amarillo muy tenue */
+    cursor: default;
+}
+
+/* Eliminar borde de la última fila */
+.tabla-incidentes tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive para tabla en pantallas pequeñas */
+@media (max-width: 768px) {
+    .tabla-incidentes th, 
+    .tabla-incidentes td {
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    /* Ocultamos columnas menos importantes en móvil si es necesario, 
+       pero como no podemos tocar HTML, ajustamos el ancho mínimo */
+    .Cuadricula {
+        margin-bottom: 20px;
+    }
+}
