@@ -6,13 +6,12 @@ from datetime import datetime
 import csv
 from collections import Counter
 from io import BytesIO
-
+import openpyxl
 
 # =========================
 # CONFIGURACIÓN DE RUTA BASE
 # =========================
 
-# Subimos un nivel porque estamos dentro de /routes
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 UPLOAD_FOLDER = os.path.join(PROJECT_ROOT, "archives")
 

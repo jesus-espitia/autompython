@@ -1,4 +1,4 @@
-from routes import funciones
+from routes import funciones, comparacion, archicos
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 import secrets
 import os
@@ -362,11 +362,13 @@ def subir_documento():
         return redirect(url_for("documentos"))
 
     user_folder = get_user_folder()
-    fecha_actual = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = secure_filename(archivo.filename)
-    nombre_final = f"{fecha_actual}_{filename}"
 
-    archivo.save(os.path.join(user_folder, nombre_final))
+
+    filename = secure_filename(archivo.filename)
+
+    ruta = os.path.join(user_folder, filename)
+
+    archivo.save(ruta)
 
     return redirect(url_for("documentos"))
 #====================================================================================================================================
@@ -414,13 +416,24 @@ def reportes():
         return redirect(url_for("login"))
     return funciones.F_reportes()
 
-@app.route("/funcion/top5", methods=["POST"])
+@app.route("/funcion/top5", methods=["GET", "POST"])
 def top5():
     if "user" not in session:
         return redirect(url_for("login"))
     return funciones.F_top5()
-    
 
+@app.route("/funcion/comparacionArchivos", methods=["GET", "POST"])
+def comparacionArchivo():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return comparacion.F_comparacionArchivo()
+
+
+@app.route("/funcion/archivoVisualizar", methods=["GET", "POST"])
+def archivoVisualizar():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return archicos.F_archivoVisualizar()
     
 # =========================
 # HOME Y LOGOUT
