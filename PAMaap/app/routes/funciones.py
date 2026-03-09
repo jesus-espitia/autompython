@@ -76,7 +76,6 @@ def F_reportes():
     return render_template("F_reportes.html", archivos=archivos)
 #–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––---------------------------------------------------------------------------
 
-
 def F_top5():
     if "user" not in session:
         return redirect(url_for("login"))
@@ -94,6 +93,8 @@ def F_top5():
             return "Error: El archivo no existe."
 
         servidores = []
+        incidentes = []
+        detalle_incidentes = {}
 
         # ==============================
         # 1️⃣ Leer CSV dinámicamente
@@ -101,23 +102,41 @@ def F_top5():
 
         with open(ruta_completa, newline='', encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
-
-            # Normalizar encabezados automáticamente
             reader.fieldnames = [h.strip() for h in reader.fieldnames]
 
             for fila in reader:
 
-                mostrar_id = fila.get("Mostrar ID", "")
-                external_ticket = fila.get("External System Ticket", "")
+                mostrar_id = fila.get("Mostrar ID", "").strip()
+                external_ticket = fila.get("External System Ticket", "").strip()
+                resumen = fila.get("Resumen", "").strip()
+                analista = fila.get("Analista gestionador", "").strip()
+                estado = fila.get("Estado", "").strip()
 
                 if not mostrar_id.upper().startswith("INC"):
                     continue
 
-                if not external_ticket.strip():
+                if not external_ticket:
                     continue
 
-                hostname = external_ticket.strip().upper()
+                hostname = external_ticket.upper()
+
                 servidores.append(hostname)
+
+                incidentes.append({
+                    "mostrar_id": mostrar_id,
+                    "analista": analista,
+                    "estado": estado,
+                    "resumen": resumen,
+                    "ticket": hostname
+                })
+
+                if hostname not in detalle_incidentes:
+                    detalle_incidentes[hostname] = []
+
+                detalle_incidentes[hostname].append({
+                    "id": mostrar_id,
+                    "resumen": resumen
+                })
 
         # ==============================
         # 2️⃣ Top 5
@@ -127,7 +146,7 @@ def F_top5():
         top5 = contador.most_common(5)
 
         # ==============================
-        # 3️⃣ Cargar Inventarios (si existen)
+        # 3️⃣ Cargar Inventarios
         # ==============================
 
         base_path = os.path.join(
@@ -141,15 +160,14 @@ def F_top5():
         ad_path = os.path.join(base_path, "INVENTARIO_AD_beta.xlsx")
 
         def cargar_excel_seguro(path):
+
             if not os.path.exists(path):
                 return pd.DataFrame()
 
             df = pd.read_excel(path)
 
-            # Normalizar columnas
             df.columns = df.columns.astype(str).str.strip().str.upper()
 
-            # Normalizar nombre servidor si existe
             if "NOMBRE SERVERS" in df.columns:
                 df["NOMBRE SERVERS"] = (
                     df["NOMBRE SERVERS"]
@@ -164,7 +182,7 @@ def F_top5():
         ad_df = cargar_excel_seguro(ad_path)
 
         # ==============================
-        # 4️⃣ Buscar información disponible
+        # 4️⃣ Construcción resultado
         # ==============================
 
         resultado_final = []
@@ -174,7 +192,6 @@ def F_top5():
             doliente = "Otros"
             datos_servidor = {}
 
-            # 🔎 Buscar en INFRA
             if not infra_df.empty and "NOMBRE SERVERS" in infra_df.columns:
                 match = infra_df[infra_df["NOMBRE SERVERS"] == servidor]
 
@@ -182,7 +199,6 @@ def F_top5():
                     doliente = "Microsoft Infra"
                     datos_servidor = match.iloc[0].to_dict()
 
-            # 🔎 Buscar en AD
             if doliente == "Otros" and not ad_df.empty and "NOMBRE SERVERS" in ad_df.columns:
                 match = ad_df[ad_df["NOMBRE SERVERS"] == servidor]
 
@@ -190,27 +206,68 @@ def F_top5():
                     doliente = "Microsoft AD"
                     datos_servidor = match.iloc[0].to_dict()
 
-            # 🔥 Construcción dinámica (solo copia lo que exista)
             registro = {
                 "servidor": servidor,
                 "cantidad": cantidad,
-                "doliente": doliente
+                "doliente": doliente,
+                "incidentes": detalle_incidentes.get(servidor, [])
             }
 
-            # Agregar todas las columnas disponibles sin romper nada
             for key, value in datos_servidor.items():
                 if key != "NOMBRE SERVERS":
                     registro[key.lower()] = value
 
             resultado_final.append(registro)
-            
+
+        # ==============================
+        # 5️⃣ Generar texto del análisis
+        # ==============================
+
+        fecha_hoy = datetime.now().strftime("%d/%m/%Y")
+
+        texto_analisis = f"""{fecha_hoy}
+
+Se realiza análisis del TOP 5 de los servidores con más incidentes:
+
+"""
+
+        dolientes = {}
+
+        for item in resultado_final:
+            doliente = item["doliente"]
+
+            if doliente not in dolientes:
+                dolientes[doliente] = []
+
+            dolientes[doliente].append(item)
+
+        for doliente, servidores_lista in dolientes.items():
+
+            texto_analisis += f"\nDoliente: {doliente} [\n"
+
+            for idx, servidor in enumerate(servidores_lista, start=1):
+
+                incidentes_lista = servidor.get("incidentes", [])
+
+                incidentes_texto = ", ".join(
+                    [f"{inc['id']} - {inc['resumen']}" for inc in incidentes_lista]
+                )
+
+                texto_analisis += (
+                    f"\t{idx:02d}. {servidor['servidor']}: "
+                    f"{servidor['cantidad']} casos ({incidentes_texto})\n"
+                )
+
+                texto_analisis += "\tNOTA:\n\n"
+
+            texto_analisis += "]\n"
 
         return render_template(
             "F_reportes.html",
             archivos=os.listdir(user_folder),
-            top5_detallado=resultado_final
+            top5_detallado=resultado_final,
+            incidentes=incidentes,
+            texto_analisis=texto_analisis
         )
 
     return redirect(url_for("reportes"))
-
-

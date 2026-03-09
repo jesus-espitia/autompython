@@ -204,7 +204,11 @@
                             {% endfor %}
                         </tbody>
                     </table>
-
+                    <div style="margin-top:30px;" id="analizarCopiar">
+                        <button onclick="copiarAnalisis()">
+                            Copiar análisis
+                        </button>
+                    </div>
                 </div>
                 {% endif %}
 
@@ -251,7 +255,17 @@
     </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/logout.js') }}"></script>
+    <script>
 
+        function copiarAnalisis() {
+
+            const texto = `{{ texto_analisis | safe }}`;
+
+            navigator.clipboard.writeText(texto)
+                .then(() => alert("Análisis copiado"));
+
+        }
+    </script>
 </body>
 
 </html>
