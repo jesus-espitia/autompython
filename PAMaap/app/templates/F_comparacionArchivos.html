@@ -9,6 +9,7 @@
     <link rel="icon" href="../Static/img/Logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/comparacionArchivos.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
 
@@ -142,13 +143,111 @@
             <h1 class="page-title">Comparacion de Archivos</h1>
             <p class="page-subtitle">Selecciona tu archivo a analizar</p>
             <div class="Comparacion_de_Archivos">
-                <!-- funcionalidad -->
+
+                <form method="POST">
+
+                    <h3>Seleccionar archivo</h3>
+
+                    <select name="archivo" required onchange="this.form.submit()">
+
+                        <option value="">-- Selecciona archivo --</option>
+
+                        {% for archivo in archivos %}
+                        <option value="{{archivo}}" {% if archivo==archivo_seleccionado %}selected{% endif %}>
+                            {{archivo}}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+
+                    {% if columnas %}
+
+                    <h3>Seleccionar columna de servidores</h3>
+
+                    <select name="columna" required>
+
+                        <option value="">-- Selecciona columna --</option>
+
+                        {% for c in columnas %}
+                        <option value="{{c}}">{{c}}</option>
+                        {% endfor %}
+
+                    </select>
+
+                    <br><br>
+
+                    <button type="submit">Comparar</button>
+
+                    {% endif %}
+
+                </form>
+
+
+                {% if resultados %}
+
+                <hr>
+
+                <button onclick="copiarResultados()" id="copiarResultados">Copiar resultados</button>
+
+                <div id="resultadoTexto">
+                    <div class="infra_resultados">
+                        <h3> 🖥️ Infra</h3>
+                        <table border="1">
+                            <tr>
+                                <th>Servidor</th>
+                            </tr>
+
+                            {% for s in resultados.infra %}
+                            <tr>
+                                <td>{{s}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <br>
+                    <div class="ad_resultados">
+                        <h3> 👥 AD</h3>
+                        <table border="1">
+                            <tr>
+                                <th>Servidor</th>
+                            </tr>
+                            {% for s in resultados.ad %}
+                            <tr>
+                                <td>{{s}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <br>
+                    <div class="otr_resultados">
+                        <h3> 🧩 Otros</h3>
+                        <table border="1">
+                            <tr>
+                                <th>Servidor</th>
+                            </tr>
+                            {% for s in resultados.otros %}
+                            <tr>
+                                <td>{{s}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                {% endif %}
+
             </div>
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/logout.js') }}"></script>
-
+    <script>
+        function copiarResultados() {
+            let texto = document.getElementById("resultadoTexto").innerText;
+            navigator.clipboard.writeText(texto);
+            alert("Resultados copiados");
+        }
+    </script>
 </body>
 
 </html>
