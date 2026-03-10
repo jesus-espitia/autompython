@@ -108,11 +108,16 @@ def send_verification_email(to_email, code, fullname):
                                 Este código expira en 10 minutos.
                             </td>
                         </tr>
-
+                                <tr>
+            <td align="center" style="padding-top:30px;">
+                <img src="https://raw.githubusercontent.com/jesus-espitia/autompython/refs/heads/main/PAMaap/app/Static/img/firma/firma_PAMaap.png" alt="Firma PAMaap" style="width:590px;opacity:0.95;">
+            </td>
+        </tr>
                     </table>
                 </td>
             </tr>
         </table>
+
     </body>
     </html>
     """
