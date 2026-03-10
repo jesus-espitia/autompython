@@ -68,5 +68,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function confirmarEliminacion() {
-    return confirm("¿Estás seguro de que deseas eliminar este archivo?");
+
+    const form = event.target;
+
+    Swal.fire({
+        title: '¿Eliminar archivo?',
+        text: "Esta acción no se puede deshacer",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            form.submit();
+        }
+
+    });
+
+    return false;
 }

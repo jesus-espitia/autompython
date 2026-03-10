@@ -13,7 +13,7 @@
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
 
-<body >
+<body>
 
     <!-- Barra Lateral (Sidebar) -->
     <aside class="sidebar" id="sidebar">
@@ -255,15 +255,21 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/logout.js') }}"></script>
     <script src="{{ url_for('static', filename='js/F_reportes.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-
         function copiarAnalisis() {
-
             const texto = `{{ texto_analisis | safe }}`;
-
-            navigator.clipboard.writeText(texto)
-                .then(() => alert("Análisis copiado"));
-
+            navigator.clipboard.writeText(texto).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Análisis copiado',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+            });
         }
     </script>
 </body>

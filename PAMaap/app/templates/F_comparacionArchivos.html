@@ -241,11 +241,21 @@
     </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/logout.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function copiarResultados() {
             let texto = document.getElementById("resultadoTexto").innerText;
-            navigator.clipboard.writeText(texto);
-            alert("Resultados copiados");
+            navigator.clipboard.writeText(texto).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Resultados copiados',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+            });
         }
     </script>
 </body>

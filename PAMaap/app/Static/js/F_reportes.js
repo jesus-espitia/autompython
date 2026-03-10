@@ -84,16 +84,54 @@ function copiarAnalisis() {
     const texto = document.body.getAttribute("data-analisis");
 
     if (!texto) {
-        alert("No hay análisis disponible");
+        Swal.fire({
+            icon: 'warning',
+            title: 'No hay análisis disponible',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+        });
         return;
     }
 
     navigator.clipboard.writeText(texto)
-        .then(() => alert("Análisis copiado"));
+        .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Análisis copiado',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            });
+        });
 
 }
 
 
-function confirmarEliminacion() {
-    return confirm("¿Estás seguro de que deseas eliminar este archivo?");
+function confirmarEliminacion(event) {
+
+    event.preventDefault();
+
+    const form = event.target.closest("form");
+
+    Swal.fire({
+        title: '¿Eliminar archivo?',
+        text: "Esta acción no se puede deshacer",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            form.submit();
+        }
+
+    });
+
+    return false;
 }
