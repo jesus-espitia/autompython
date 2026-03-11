@@ -1,4 +1,5 @@
 from routes import funciones, comparacion, archicos
+import glob
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 import secrets
 import os
@@ -49,6 +50,34 @@ def init_database():
         wb.close()
 
 init_database()
+
+# =========================
+# LIMPIEZA SILENCIOSA DE CACHE PYTHON
+# =========================
+
+def limpiar_cache_python():
+    try:
+        cache_folders = [
+            os.path.join(PROJECT_ROOT, "__pycache__"),
+            os.path.join(PROJECT_ROOT, "routes", "__pycache__")
+        ]
+
+        for folder in cache_folders:
+            if os.path.exists(folder):
+                for file in os.listdir(folder):
+                    if file.endswith(".pyc"):
+                        try:
+                            os.remove(os.path.join(folder, file))
+                        except:
+                            pass
+    except:
+        pass
+
+
+@app.before_request
+def ejecutar_limpieza_cache():
+    limpiar_cache_python()
+
 #====================================================================================================================================
 #====================================================================================================================================
 # =========================
