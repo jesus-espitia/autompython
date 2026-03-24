@@ -4,17 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAMaap - Funciones</title>
+    <title>PAMaap - Unificar Archivos</title>
+    <link rel="stylesheet" href="../Static/css/styles.css">
+    <link rel="icon" href="../Static/img/Logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/funciones.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
 
 <body>
+
+    <!-- Barra Lateral (Sidebar) -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo-icon">
+                <!-- Icono SVG nativo -->
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
                 </svg>
@@ -133,114 +137,15 @@
             </div>
         </header>
 
-
         <div class="content-area">
-            <!-- Cuerpo de la Página: FUNCIONES -->
-
-            <h1 class="page-title">Funciones</h1>
-            <p class="page-subtitle">Selecciona una función para continuar</p>
-
-            <!-- Contenedor de Tarjetas Enlace -->
-            <div class="cards-container">
-
-                <!-- Tarjeta Enlace 1 -->
-                <a href="/funcion/comparacionArchivos" class="adjustable-card">
-                    <div class="card-image-circle">
-                        <!-- Cambia la ruta src por tu imagen local -->
-                        <img src="../Static/img/hoja.png" alt="Analisis">
-                        <div class="image-fallback">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="card-label">Comparacion de Archivos</span>
-                </a>
-
-                <!-- Tarjeta Enlace 2 -->
-                <a href="/funcion/reportes" class="adjustable-card">
-                    <div class="card-image-circle">
-                        <img src="../Static/img/hoja azul.png" alt="Reportes">
-                        <div class="image-fallback">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="card-label">TOP5INC</span>
-                </a>
-
-                <!-- Tarjeta Enlace 3 -->
-                <a href="/funcion/archivoVisualizar" class="adjustable-card">
-                    <div class="card-image-circle">
-                        <img src="../Static/img/hoja naranja.png" alt="Estadisticas">
-                        <div class="image-fallback">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="card-label">Archivos</span>
-                </a>
-
-                <!-- Tarjeta Enlace 4 -->
-                <a href="/funcion/UnificarArchivos" class="adjustable-card">
-                    <div class="card-image-circle">
-                        <img src="../Static/img/bambu.png" alt="Exportar">
-                        <div class="image-fallback">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="card-label">Unificar</span>
-                </a>
-
-                <!-- Tarjeta Enlace 5 -->
-                <a href="/funcion/importar" class="adjustable-card">
-                    <div class="card-image-circle">
-                        <img src="../Static/img/hojas pequeñas.png" alt="Importar">
-                        <div class="image-fallback">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="card-label">Importar</span>
-                </a>
-
-                <!-- Tarjeta Enlace 6 -->
-                <a href="/funcion/configurar" class="adjustable-card">
-                    <div class="card-image-circle">
-                        <img src="../Static/img/hoja triangulo.png" alt="Configurar">
-                        <div class="image-fallback">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="card-label">Configurar</span>
-                </a>
-
-            </div>
+            <h1 class="page-title">Unifica tus Archivos</h1>
+            <p class="page-subtitle">Unificar archivos</p>
+            <!-- Contenido -->
         </div>
     </main>
-
-
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/logout.js') }}"></script>
+
 </body>
 
 </html>

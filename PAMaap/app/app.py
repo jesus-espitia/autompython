@@ -1,4 +1,4 @@
-from routes import funciones, comparacion, archicos
+from routes import funciones, comparacion, archivos, discoMemoriaCpu,documentosPublicos
 import glob
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 import secrets
@@ -467,8 +467,22 @@ def comparacionArchivo():
 def archivoVisualizar():
     if "user" not in session:
         return redirect(url_for("login"))
-    return archicos.F_archivoVisualizar()
-    
+    return archivos.F_archivoVisualizar()
+
+@app.route("/funcion/UnificarArchivos", methods=["GET", "POST"])
+def discoMemoriaCpuVisualizar():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return discoMemoriaCpu.F_discoMemoriaCpu()
+
+@app.route("/documentosPublicos", methods=["GET", "POST"])
+def documentosPublicosVisualizar():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return documentosPublicos.documentosPublicos()
+#====================================================================================================================================
+#====================================================================================================================================
+
 # =========================
 # HOME Y LOGOUT
 # =========================
