@@ -747,3 +747,42 @@ input:checked+.slider:before {
         text-align: center;
     }
 }
+.documentosPublicos {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el botón horizontalmente */
+    transition: border-color 0.3s ease;
+}
+
+.documentosPublicos:hover {
+    border-color: #444;
+}
+
+/* Estilo del botón enlace (Versión rellena - Primary) */
+.action-btn {
+    display: inline-block;
+    background-color: var(--accent-yellow); /* Fondo amarillo */
+    color: #000000; /* Texto negro para contraste */
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    border: 2px solid var(--accent-yellow);
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: transparent; /* Se invierte al pasar el mouse */
+    color: var(--accent-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 208, 0, 0.2);
+}
