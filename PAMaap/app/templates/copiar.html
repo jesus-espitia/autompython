@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAMaap - Unificar Archivos</title>
+    <title>PAMaap - N/D</title>
     <link rel="stylesheet" href="../Static/css/styles.css">
     <link rel="icon" href="../Static/img/Logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -138,26 +138,9 @@
         </header>
 
         <div class="content-area">
-            <!-- Nueva estructura con clase form-container -->
-            <div class="form-container">
-                <form method="POST">
-                    <label for="mes">Mes a procesar:</label>
-
-                    <div class="form-row">
-                        <!-- Select con estilos oscuros -->
-                        <select name="mes" id="mes" required class="form-select">
-                            {% for mes in meses %}
-                            <option value="{{ mes }}">{{ mes }}</option>
-                            {% endfor %}
-                        </select>
-
-                        <!-- Botón usando la clase de acción principal -->
-                        <button type="submit" class="action-btn">
-                            Generar y Descargar ZIP
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <h1 class="page-title">N/D</h1>
+            <p class="page-subtitle">N/D</p>
+            <!-- Contenido -->
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
