@@ -141,6 +141,12 @@
         <div class="content-area">
             <h1 class="page-title">📂 Documentos Públicos</h1>
             <p class="page-subtitle">Gestiona y visualiza los archivos almacenados.</p>
+            <br>
+            <div class="documentosPublicos">
+                <a href="/documentos" class="action-btn"> Documentos Privados </a>
+            </div>
+            <br>
+            <br>
 
             <form method="POST">
                 <select name="mes" required>
@@ -199,25 +205,9 @@
                 <li>
                     📄 {{ archivo.nombre }} - 👤 {{ archivo.owner }}
 
-                    <!-- VER -->
-                    <form method="POST" target="_blank" style="display:inline;">
-                        <input type="hidden" name="accion" value="ver">
-                        <input type="hidden" name="mes" value="{{ item.mes }}">
-                        <input type="hidden" name="subcarpeta" value="CPU y Memoria">
-                        <input type="hidden" name="archivo_nombre" value="{{ archivo.nombre }}">
 
-                        <button type="submit">Ver</button>
-                    </form>
 
-                    <!-- DESCARGAR -->
-                    <form method="POST" style="display:inline;">
-                        <input type="hidden" name="accion" value="descargar">
-                        <input type="hidden" name="mes" value="{{ item.mes }}">
-                        <input type="hidden" name="subcarpeta" value="CPU y Memoria">
-                        <input type="hidden" name="archivo_nombre" value="{{ archivo.nombre }}">
 
-                        <button type="submit">Descargar</button>
-                    </form>
 
                     <!-- ELIMINAR SOLO SI ES EL DUEÑO -->
                     {% if archivo.owner == session["user"]["fullname"] %}
@@ -239,23 +229,8 @@
                 <li>
                     📄 {{ archivo.nombre }} - 👤 {{ archivo.owner }}
 
-                    <form method="POST" target="_blank" style="display:inline;">
-                        <input type="hidden" name="accion" value="ver">
-                        <input type="hidden" name="mes" value="{{ item.mes }}">
-                        <input type="hidden" name="subcarpeta" value="CPU y Memoria">
-                        <input type="hidden" name="archivo_nombre" value="{{ archivo.nombre }}">
 
-                        <button type="submit">Ver</button>
-                    </form>
 
-                    <form method="POST" style="display:inline;">
-                        <input type="hidden" name="accion" value="descargar">
-                        <input type="hidden" name="mes" value="{{ item.mes }}">
-                        <input type="hidden" name="subcarpeta" value="CPU y Memoria">
-                        <input type="hidden" name="archivo_nombre" value="{{ archivo.nombre }}">
-
-                        <button type="submit">Descargar</button>
-                    </form>
 
                     {% if archivo.owner == session["user"]["fullname"] %}
                     <form method="POST" style="display:inline;">
