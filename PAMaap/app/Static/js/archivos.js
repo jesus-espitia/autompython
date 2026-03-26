@@ -1,28 +1,21 @@
 let estadoInicial = null;
 
-// ============================
-// CAPTURAR ESTADO INICIAL
-// ============================
 function capturarEstadoInicial() {
     estadoInicial = JSON.stringify(obtenerDatosTabla());
 }
 
-// Ejecutar al cargar
+
 window.addEventListener("load", () => {
     setTimeout(capturarEstadoInicial, 500);
 });
 
-// ============================
-// VERIFICAR CAMBIOS
-// ============================
+
 function hayCambios() {
     const actual = JSON.stringify(obtenerDatosTabla());
     return actual !== estadoInicial;
 }
 
-// ============================
-// ALERTA AL SALIR
-// ============================
+
 window.addEventListener("beforeunload", function (e) {
     if (hayCambios()) {
         e.preventDefault();
@@ -30,9 +23,7 @@ window.addEventListener("beforeunload", function (e) {
     }
 });
 
-// ============================
-// AGREGAR FILA
-// ============================
+
 function agregarFila() {
     const tbody = document.querySelector("#tabla tbody");
     const numColumnas = document.querySelectorAll("#tabla thead th").length - 1;
@@ -52,18 +43,14 @@ function agregarFila() {
     tbody.appendChild(fila);
 }
 
-// ============================
-// ELIMINAR FILA
-// ============================
+
 function eliminarFila(btn) {
     if (confirm("¿Eliminar esta fila?")) {
         btn.closest("tr").remove();
     }
 }
 
-// ============================
-// AGREGAR COLUMNA
-// ============================
+
 function agregarColumna() {
     const nombre = prompt("Nombre de la nueva columna:");
     if (!nombre) return;
@@ -82,9 +69,7 @@ function agregarColumna() {
     });
 }
 
-// ============================
-// ELIMINAR COLUMNA
-// ============================
+
 function eliminarColumna() {
     const columnas = document.querySelectorAll("#tabla thead th");
 
@@ -118,9 +103,6 @@ function eliminarColumna() {
     });
 }
 
-// ============================
-// OBTENER DATOS
-// ============================
 function obtenerDatosTabla() {
     let columnas = [];
     let filas = [];
@@ -147,9 +129,6 @@ function obtenerDatosTabla() {
     return { columnas, filas };
 }
 
-// ============================
-// GUARDAR ARCHIVO (MEJORADO)
-// ============================
 function guardarArchivo(nombreArchivo) {
 
     if (!hayCambios()) {
@@ -173,7 +152,6 @@ function guardarArchivo(nombreArchivo) {
         if (response.status === "ok") {
             alert("✅ Archivo guardado correctamente");
 
-            // 🔥 ACTUALIZAR ESTADO BASE
             capturarEstadoInicial();
 
         } else {
