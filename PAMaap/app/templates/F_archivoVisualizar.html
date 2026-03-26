@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../Static/css/styles.css">
     <link rel="icon" href="../Static/img/Logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/archivos.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
@@ -137,14 +138,52 @@
             </div>
         </header>
 
-
         <div class="content-area">
-            <h1 class="page-title">Visualiza tus Archivos</h1>
-            <p class="page-subtitle">Selecciona tu archivo a analizar</p>
+            <h1 class="page-title">Gestión de Alimentadores</h1>
+            <form method="GET" action="/funcion/archivoVisualizar">
+                <select name="archivo" required>
+                    <option value="">-- Selecciona archivo --</option>
+                    {% for archivo in archivos %}
+                    <option value="{{ archivo.nombre }}">{{ archivo.nombre }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Abrir</button>
+            </form>
+            {% if columnas and datos %}
+            <h2 style="margin-top:20px;">Archivo: {{ archivo }}</h2>
+
+            <button onclick="agregarFila()">➕ Fila</button>
+            <button onclick="agregarColumna()">➕ Columna</button>
+            <button onclick="eliminarColumna()">🗑️ Columna</button>
+            <button onclick="guardarArchivo()">💾 Guardar</button>
+
+            <table id="tabla" border="1" style="margin-top:20px; width:100%;">
+                <thead>
+                    <tr>
+                        {% for col in columnas %}
+                        <th contenteditable="true">{{ col }}</th>
+                        {% endfor %}
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fila in datos %}
+                    <tr>
+                        {% for col in columnas %}
+                        <td contenteditable="true">{{ fila[col] }}</td>
+                        {% endfor %}
+                        <td><button onclick="eliminarFila(this)">❌</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
 
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/archivos.js') }}"></script>
     <script src="{{ url_for('static', filename='js/logout.js') }}"></script>
 
 </body>
