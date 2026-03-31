@@ -69,16 +69,25 @@ def enriquecer_cpu_memoria(df_cpu):
 
     ruta_cpu = os.path.join(ruta_base, "RVTools_tabvCPU.xlsx")
     ruta_mem = os.path.join(ruta_base, "RVTools_tabvMemory.xlsx")
+    ruta_fisicos = os.path.join(ruta_base, "Servidores_Fisicos.xlsx")
 
-
+    # =========================
+    # LEER ARCHIVOS
+    # =========================
     df_cpu_tools = pd.read_excel(ruta_cpu)
     df_mem_tools = pd.read_excel(ruta_mem)
+    df_fisicos = pd.read_excel(ruta_fisicos)
 
-
+    # =========================
+    # LIMPIAR COLUMNAS
+    # =========================
     df_cpu_tools.columns = [col.strip() for col in df_cpu_tools.columns]
     df_mem_tools.columns = [col.strip() for col in df_mem_tools.columns]
+    df_fisicos.columns = [col.strip() for col in df_fisicos.columns]
 
-
+    # =========================
+    # NORMALIZAR NOMBRES
+    # =========================
     def limpiar_nombre(nombre):
         if pd.isna(nombre):
             return ""
@@ -86,10 +95,14 @@ def enriquecer_cpu_memoria(df_cpu):
         return nombre.strip().lower()
 
     df_cpu["Node_clean"] = df_cpu["Node"].apply(limpiar_nombre)
+
     df_cpu_tools["VM_clean"] = df_cpu_tools["VM"].apply(limpiar_nombre)
     df_mem_tools["VM_clean"] = df_mem_tools["VM"].apply(limpiar_nombre)
+    df_fisicos["Node_clean"] = df_fisicos["Node"].apply(limpiar_nombre)
 
-
+    # =========================
+    # MERGE CPU (RVTOOLS)
+    # =========================
     df_cpu = df_cpu.merge(
         df_cpu_tools[["VM_clean", "CPUs", "Sockets", "Cores p/s"]],
         left_on="Node_clean",
@@ -97,9 +110,11 @@ def enriquecer_cpu_memoria(df_cpu):
         how="left"
     )
 
+    # =========================
+    # MERGE MEMORIA (RVTOOLS)
+    # =========================
     if "SIZE GB" not in df_mem_tools.columns:
         raise Exception("No se encontró la columna 'SIZE GB' en RVTools_tabvMemory.xlsx")
-
 
     df_cpu = df_cpu.merge(
         df_mem_tools[["VM_clean", "SIZE GB"]],
@@ -108,8 +123,46 @@ def enriquecer_cpu_memoria(df_cpu):
         how="left"
     )
 
+    # =========================
+    # MERGE FISICOS
+    # =========================
+    df_cpu = df_cpu.merge(
+        df_fisicos[["Node_clean", "CPUs", "SIZE GB", "Fisico"]],
+        on="Node_clean",
+        how="left",
+        suffixes=("", "_fisico")
+    )
 
-    df_cpu.drop(columns=["Node_clean", "VM_clean_x", "VM_clean_y"], inplace=True, errors="ignore")
+    # =========================
+    # COMPLETAR DATOS SI FALTAN
+    # =========================
+    df_cpu["CPUs"] = df_cpu["CPUs"].fillna(df_cpu["CPUs_fisico"])
+    df_cpu["SIZE GB"] = df_cpu["SIZE GB"].fillna(df_cpu["SIZE GB_fisico"])
+
+    # =========================
+    # CREAR COLUMNA TIPO
+    # =========================
+    df_cpu["Tipo"] = df_cpu["Fisico"].apply(
+        lambda x: "FISICO" if pd.notna(x) and str(x).strip() != "" else "VIRTUAL"
+    )
+
+    # =========================
+    # LIMPIAR COLUMNAS AUX
+    # =========================
+    df_cpu.drop(columns=[
+        "Node_clean",
+        "VM_clean_x",
+        "VM_clean_y",
+        "CPUs_fisico",
+        "SIZE GB_fisico",
+        "Fisico"
+    ], inplace=True, errors="ignore")
+
+    # =========================
+    # ORDENAR (Tipo al final)
+    # =========================
+    cols = [col for col in df_cpu.columns if col != "Tipo"] + ["Tipo"]
+    df_cpu = df_cpu[cols]
 
     return df_cpu
 
