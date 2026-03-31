@@ -70,12 +70,6 @@ def F_archivoVisualizar():
             return jsonify({"status": "error", "msg": "Archivo no existe"})
 
         try:
-            import shutil
-
-            backup = ruta.replace(".xlsx", "_backup.xlsx")
-            if not os.path.exists(backup):
-                shutil.copy(ruta, backup)
-
             df = pd.DataFrame(filas, columns=columnas)
             df.to_excel(ruta, index=False)
 

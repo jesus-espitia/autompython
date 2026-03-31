@@ -129,7 +129,7 @@ function obtenerDatosTabla() {
     return { columnas, filas };
 }
 
-function guardarArchivo(nombreArchivo) {
+function guardarArchivo() {
 
     if (!hayCambios()) {
         alert("⚠️ No hay cambios para guardar");
@@ -140,20 +140,32 @@ function guardarArchivo(nombreArchivo) {
 
     const data = obtenerDatosTabla();
 
-    fetch(`/archivo/guardar/${nombreArchivo}`, {
+    // 🔥 Obtener nombre del archivo desde el HTML
+    const archivo = document.querySelector("h2")?.innerText.replace("Archivo: ", "").trim();
+
+    if (!archivo) {
+        alert("❌ No se pudo identificar el archivo");
+        return;
+    }
+
+    const payload = {
+        archivo: archivo,
+        columnas: data.columnas,
+        filas: data.filas
+    };
+
+    fetch(`/funcion/archivoVisualizar`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(payload)
     })
     .then(res => res.json())
     .then(response => {
         if (response.status === "ok") {
             alert("✅ Archivo guardado correctamente");
-
             capturarEstadoInicial();
-
         } else {
             alert("❌ Error: " + response.msg);
         }
