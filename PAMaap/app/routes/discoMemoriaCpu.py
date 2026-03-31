@@ -172,10 +172,52 @@ def generar_zip(df_cpu, df_disco, mes):
     buffer = BytesIO()
 
     with zipfile.ZipFile(buffer, "w") as z:
+
+        # =========================
+        # 📊 CPU CON FORMATO
+        # =========================
         cpu_bytes = BytesIO()
         df_cpu.to_excel(cpu_bytes, index=False)
-        z.writestr("CPU_Memoria_Unificado.xlsx", cpu_bytes.getvalue())
 
+        # 🔥 Aplicar formato SIN alterar lógica existente
+        from openpyxl import load_workbook
+        from openpyxl.styles import PatternFill
+
+        cpu_bytes.seek(0)
+        wb = load_workbook(cpu_bytes)
+        ws = wb.active
+
+        # Buscar columna "Tipo"
+        col_tipo = None
+        for col in range(1, ws.max_column + 1):
+            if ws.cell(row=1, column=col).value == "Tipo":
+                col_tipo = col
+                break
+
+        # Colores
+        rojo = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        azul = PatternFill(start_color="BDD7EE", end_color="BDD7EE", fill_type="solid")
+
+        # Aplicar colores
+        if col_tipo:
+            for row in range(2, ws.max_row + 1):
+                valor = ws.cell(row=row, column=col_tipo).value
+
+                if valor == "FISICO":
+                    ws.cell(row=row, column=col_tipo).fill = rojo
+                elif valor == "VIRTUAL":
+                    ws.cell(row=row, column=col_tipo).fill = azul
+
+        # Guardar Excel formateado
+        cpu_final = BytesIO()
+        wb.save(cpu_final)
+
+        # 🔥 MISMO NOMBRE, MISMA LÓGICA
+        z.writestr("CPU_Memoria_Unificado.xlsx", cpu_final.getvalue())
+
+        # =========================
+        # 📀 DISCO (NO SE TOCA)
+        # =========================
         disco_bytes = BytesIO()
         df_disco.to_excel(disco_bytes, index=False)
         z.writestr("Disco_Unificado.xlsx", disco_bytes.getvalue())
@@ -215,5 +257,7 @@ def F_discoMemoriaCpu():
         carpeta for carpeta in os.listdir(BASE_PUBLIC)
         if os.path.isdir(os.path.join(BASE_PUBLIC, carpeta))
     ]
+
+
 
     return render_template("F_discoMemoriaCpu.html", meses=meses)
