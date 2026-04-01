@@ -65,3 +65,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cards = document.querySelectorAll(".adjustable-card");
+
+    cards.forEach(card => {
+        card.addEventListener("click", function (e) {
+
+            const url = this.getAttribute("href");
+
+            if (!url || url === "#") return;
+
+            e.preventDefault();
+
+            let title = "¿Continuar?";
+            let text = "¿Deseas entrar a esta función?";
+
+            if (url.includes("comparacionArchivos")) {
+                title = "📂 Comparación de Archivos";
+                text = "Se seleccionará un archivo y una columna específica para comparar información de servidores. El sistema analizará los datos y clasificará los resultados en diferentes categorías (Infraestructura, AD y Otros), facilitando la identificación de diferencias. Además, podrás copiar los resultados generados para su uso posterior.";
+            }
+
+            else if (url.includes("reportes")) {
+                title = "📊 Análisis de Incidentes (Top 5)";
+                text = "Se seleccionará un archivo para analizar los incidentes registrados. El sistema identificará los 5 servidores con mayor cantidad de incidentes, mostrando información detallada como responsable, tipo y ubicación. Además, podrás visualizar el detalle de los incidentes filtrados y copiar un resumen del análisis generado.";
+            }
+
+            else if (url.includes("archivoVisualizar")) {
+                title = "🗂️ Gestión de Alimentadores";
+                text = "Se seleccionará un archivo para visualizar su contenido en formato de tabla editable. Podrás agregar o eliminar filas y columnas, así como modificar la información directamente. Finalmente, tendrás la opción de guardar los cambios realizados en el archivo.";
+            }
+
+            else if (url.includes("UnificarArchivos")) {
+                title = "📦 Unificación y Generación de Reporte Mensual";
+                text = "Se seleccionará un mes para procesar y unificar múltiples archivos relacionados. El sistema consolidará la información y generará automáticamente un reporte completo, el cual será descargado en formato ZIP para su uso y distribución.";
+            }
+
+            else if (url.includes("importar")) {
+                title = "Importar Información";
+                text = "Se importarán nuevos datos. Esto podría sobrescribir información existente.";
+            }
+
+            else if (url.includes("configurar")) {
+                title = "Configuración";
+                text = "Accederás a configuraciones críticas del sistema. Usa esta opción con cuidado.";
+            }
+
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, continuar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+
+        });
+    });
+
+});
