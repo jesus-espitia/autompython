@@ -93,10 +93,6 @@
     }
 }
 
-/* =========================================
-   MÓDULO DE IMAGEN REAL - Content Area
-   ========================================= */
-
 .content-area .image-module {
     margin-top: 2rem;
     width: 100%;
@@ -109,7 +105,6 @@
     transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-/* Overlay difuminado sobre la imagen */
 .content-area .image-module::after {
     content: "";
     position: absolute;
@@ -140,7 +135,6 @@
     );
 }
 
-/* Imagen real */
 .content-area .module-image {
     width: 100%;
     height: 320px;
@@ -152,10 +146,6 @@
 .content-area .image-module:hover .module-image {
     transform: scale(1.04);
 }
-
-/* =========================================
-   RESPONSIVE - Imagen Real
-   ========================================= */
 
 @media (max-width: 768px) {
     .content-area .module-image {
