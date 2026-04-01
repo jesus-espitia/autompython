@@ -139,112 +139,114 @@
         </header>
 
         <div class="content-area">
-            <h1 class="page-title">📂 Documentos Públicos</h1>
-            <p class="page-subtitle">Gestiona y visualiza los archivos almacenados.</p>
-            <br>
-            <div class="documentosPublicos">
-                <a href="/documentos" class="action-btn"> Documentos Privados </a>
-            </div>
-            <br>
-            <br>
+            <div class="buscadores">
+                <h1 class="page-title">📂 Documentos Públicos</h1>
+                <p class="page-subtitle">Gestiona y visualiza los archivos almacenados.</p>
+                <br>
+                <div class="documentosPublicos">
+                    <a href="/documentos" class="action-btn"> Documentos Privados </a>
+                </div>
+                <br>
+                <br>
 
-            <form method="POST">
-                <select name="mes" required>
-                    <option value="">Seleccionar Mes</option>
-                    <option>Enero</option>
-                    <option>Febrero</option>
-                    <option>Marzo</option>
-                    <option>Abril</option>
-                    <option>Mayo</option>
-                    <option>Junio</option>
-                    <option>Julio</option>
-                    <option>Agosto</option>
-                    <option>Septiembre</option>
-                    <option>Octubre</option>
-                    <option>Noviembre</option>
-                    <option>Diciembre</option>
-                </select>
+                <form method="POST">
+                    <select name="mes" required>
+                        <option value="">Seleccionar Mes</option>
+                        <option>Enero</option>
+                        <option>Febrero</option>
+                        <option>Marzo</option>
+                        <option>Abril</option>
+                        <option>Mayo</option>
+                        <option>Junio</option>
+                        <option>Julio</option>
+                        <option>Agosto</option>
+                        <option>Septiembre</option>
+                        <option>Octubre</option>
+                        <option>Noviembre</option>
+                        <option>Diciembre</option>
+                    </select>
 
-                <button type="submit">Crear Carpeta</button>
-            </form>
+                    <button type="submit">Crear Carpeta</button>
+                </form>
 
-            <br>
+                <br>
 
-            <!-- SUBIR ARCHIVO -->
-            <form method="POST" enctype="multipart/form-data">
+                <!-- SUBIR ARCHIVO -->
+                <form method="POST" enctype="multipart/form-data">
 
-                <!-- 🔥 ESTE ERA EL PROBLEMA -->
-                <select name="mes" required>
-                    <option value="">Seleccionar Mes</option>
+                    <!-- 🔥 ESTE ERA EL PROBLEMA -->
+                    <select name="mes" required>
+                        <option value="">Seleccionar Mes</option>
 
-                    {% for mes in meses %}
-                    <option value="{{ mes }}">{{ mes }}</option>
+                        {% for mes in meses %}
+                        <option value="{{ mes }}">{{ mes }}</option>
+                        {% endfor %}
+
+                    </select>
+
+                    <select name="subcarpeta" required>
+                        <option value="">Seleccionar Carpeta</option>
+                        <option value="CPU y Memoria">CPU y Memoria</option>
+                        <option value="Disco">Disco</option>
+                    </select>
+
+                    <input type="file" name="archivo" accept=".xlsx" required>
+
+                    <button type="submit">Subir Archivo</button>
+                </form>
+
+                <hr>
+
+                <!-- VISUALIZACIÓN -->
+                {% for item in publicos %}
+                <h3>📁 {{ item.mes }}</h3>
+
+                <strong>CPU y Memoria:</strong>
+                <ul>{% for archivo in item.cpu %}
+                    <li>
+                        📄 {{ archivo.nombre }} - 👤 {{ archivo.owner }}
+
+
+
+
+
+                        <!-- ELIMINAR SOLO SI ES EL DUEÑO -->
+                        {% if archivo.owner == session["user"]["fullname"] %}
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="accion" value="eliminar">
+                            <input type="hidden" name="mes" value="{{ item.mes }}">
+                            <input type="hidden" name="subcarpeta" value="CPU y Memoria">
+                            <input type="hidden" name="archivo" value="{{ archivo.nombre }}">
+                            <button type="submit"> Eliminar</button>
+                        </form>
+                        {% endif %}
+                    </li>
                     {% endfor %}
+                </ul>
 
-                </select>
-
-                <select name="subcarpeta" required>
-                    <option value="">Seleccionar Carpeta</option>
-                    <option value="CPU y Memoria">CPU y Memoria</option>
-                    <option value="Disco">Disco</option>
-                </select>
-
-                <input type="file" name="archivo" accept=".xlsx" required>
-
-                <button type="submit">Subir Archivo</button>
-            </form>
-
-            <hr>
-
-            <!-- VISUALIZACIÓN -->
-            {% for item in publicos %}
-            <h3>📁 {{ item.mes }}</h3>
-
-            <strong>CPU y Memoria:</strong>
-            <ul>{% for archivo in item.cpu %}
-                <li>
-                    📄 {{ archivo.nombre }} - 👤 {{ archivo.owner }}
+                <strong>Disco:</strong>
+                <ul>
+                    {% for archivo in item.disco %}
+                    <li>
+                        📄 {{ archivo.nombre }} - 👤 {{ archivo.owner }}
 
 
 
 
-
-                    <!-- ELIMINAR SOLO SI ES EL DUEÑO -->
-                    {% if archivo.owner == session["user"]["fullname"] %}
-                    <form method="POST" style="display:inline;">
-                        <input type="hidden" name="accion" value="eliminar">
-                        <input type="hidden" name="mes" value="{{ item.mes }}">
-                        <input type="hidden" name="subcarpeta" value="CPU y Memoria">
-                        <input type="hidden" name="archivo" value="{{ archivo.nombre }}">
-                        <button type="submit"> Eliminar</button>
-                    </form>
-                    {% endif %}
-                </li>
+                        {% if archivo.owner == session["user"]["fullname"] %}
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="accion" value="eliminar">
+                            <input type="hidden" name="mes" value="{{ item.mes }}">
+                            <input type="hidden" name="subcarpeta" value="Disco">
+                            <input type="hidden" name="archivo" value="{{ archivo.nombre }}">
+                            <button type="submit"> Eliminar</button>
+                        </form>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
                 {% endfor %}
-            </ul>
-
-            <strong>Disco:</strong>
-            <ul>
-                {% for archivo in item.disco %}
-                <li>
-                    📄 {{ archivo.nombre }} - 👤 {{ archivo.owner }}
-
-
-
-
-                    {% if archivo.owner == session["user"]["fullname"] %}
-                    <form method="POST" style="display:inline;">
-                        <input type="hidden" name="accion" value="eliminar">
-                        <input type="hidden" name="mes" value="{{ item.mes }}">
-                        <input type="hidden" name="subcarpeta" value="Disco">
-                        <input type="hidden" name="archivo" value="{{ archivo.nombre }}">
-                        <button type="submit"> Eliminar</button>
-                    </form>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% endfor %}
+            </div>
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

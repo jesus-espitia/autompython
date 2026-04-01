@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAMaap- Documentos Privados</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/documentos.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
@@ -135,67 +136,69 @@
 
         <!-- Cuerpo de la Página: DOCUMENTOS -->
         <div class="content-area">
-            <h1 class="page-title">Documentos Privados</h1>
-            <p class="page-subtitle">Gestiona y visualiza tus archivos almacenados.</p>
-            <br>
-            <div class="documentosPublicos">
-                <a href="/documentosPublicos" class="action-btn"> Documentos Publicos </a>
-            </div>
-            <br>
-            <br>
-            <!-- Formulario Subir Documento -->
-            <form action="/subir_documento" method="POST" enctype="multipart/form-data" style="margin-bottom:20px;">
-                <input type="file" name="archivo" required id="Seleccionar">
-                <button type="submit" class="doc-action-btn">Subir Documento</button>
-            </form>
-
-            <!-- Lista de Documentos -->
-            <div class="documents-list">
-                <p id="noResults" style="display:none; margin-top:15px;">
-                    No se encontraron documentos.
-                </p>
-                {% if archivos %}
-                {% for archivo in archivos %}
-                <div class="doc-item" data-nombre="{{ archivo.nombre | lower }}"
-                    data-fecha="{{ archivo.fecha | lower }}" data-tamano="{{ archivo.tamano }}">
-                    <div class="doc-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                            <line x1="16" y1="13" x2="8" y2="13" />
-                            <line x1="16" y1="17" x2="8" y2="17" />
-                        </svg>
-                    </div>
-                    <div class="doc-info">
-                        <span class="doc-name">{{ archivo.nombre }}</span>
-                        <span class="doc-meta">
-                            {{ archivo.tamano }} KB • {{ archivo.fecha }}
-                        </span>
-                    </div>
-                    <div style="display:flex; gap:8px;">
-
-                        <a href="/ver/{{ archivo.nombre }}" target="_blank" class="doc-action-btn">
-                            Ver
-                        </a>
-
-                        <a href="/descargar/{{ archivo.nombre }}" class="doc-action-btn">
-                            Descargar
-                        </a>
-
-                        <form action="/eliminar/{{ archivo.nombre }}" method="POST"
-                            onsubmit="return confirmarEliminacion();">
-                            <button type="submit" class="doc-action-btn">
-                                Eliminar
-                            </button>
-                        </form>
-
-                    </div>
+            <div class="buscadores">
+                <h1 class="page-title">Documentos Privados</h1>
+                <p class="page-subtitle">Gestiona y visualiza tus archivos almacenados.</p>
+                <br>
+                <div class="documentosPublicos">
+                    <a href="/documentosPublicos" class="action-btn"> Documentos Publicos </a>
                 </div>
-                {% endfor %}
-                {% else %}
-                <p>No hay documentos disponibles.</p>
-                {% endif %}
+                <br>
+                <br>
+                <!-- Formulario Subir Documento -->
+                <form action="/subir_documento" method="POST" enctype="multipart/form-data" style="margin-bottom:20px;">
+                    <input type="file" name="archivo" required id="Seleccionar">
+                    <button type="submit" class="doc-action-btn">Subir Documento</button>
+                </form>
 
+                <!-- Lista de Documentos -->
+                <div class="documents-list">
+                    <p id="noResults" style="display:none; margin-top:15px;">
+                        No se encontraron documentos.
+                    </p>
+                    {% if archivos %}
+                    {% for archivo in archivos %}
+                    <div class="doc-item" data-nombre="{{ archivo.nombre | lower }}"
+                        data-fecha="{{ archivo.fecha | lower }}" data-tamano="{{ archivo.tamano }}">
+                        <div class="doc-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                        </div>
+                        <div class="doc-info">
+                            <span class="doc-name">{{ archivo.nombre }}</span>
+                            <span class="doc-meta">
+                                {{ archivo.tamano }} KB • {{ archivo.fecha }}
+                            </span>
+                        </div>
+                        <div style="display:flex; gap:8px;">
+
+                            <a href="/ver/{{ archivo.nombre }}" target="_blank" class="doc-action-btn" id="a_ver_descargar">
+                                Ver
+                            </a>
+
+                            <a href="/descargar/{{ archivo.nombre }}" class="doc-action-btn" id="a_ver_descargar">
+                                Descargar
+                            </a>
+
+                            <form action="/eliminar/{{ archivo.nombre }}" method="POST"
+                                onsubmit="return confirmarEliminacion();">
+                                <button type="submit" class="doc-action-btn">
+                                    Eliminar
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No hay documentos disponibles.</p>
+                    {% endif %}
+
+                </div>
             </div>
         </div>
     </main>

@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="../Static/css/styles.css">
     <link rel="icon" href="../Static/img/Logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/F_reportes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/Cuadricula.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
 
@@ -140,115 +140,116 @@
 
 
         <div class="content-area">
+            <div class="buscadores">
+                <h1 class="page-title">Funcion - Top5 Incidentes</h1>
+                <p class="page-subtitle">Selecciona tu archivo a analizar</p>
 
-            <h1 class="page-title">Funcion - Top5 Incidentes</h1>
-            <p class="page-subtitle">Selecciona tu archivo a analizar</p>
+                {% if archivos %}
+                <form method="POST" action="/funcion/top5">
 
-            {% if archivos %}
-            <form method="POST" action="/funcion/top5">
+                    <div style="margin-top:20px;">
+                        <select name="archivo_seleccionado" required style="padding:10px; width:300px;">
+                            <option value="" disabled selected>-- Selecciona un archivo --</option>
 
-                <div style="margin-top:20px;">
-                    <select name="archivo_seleccionado" required style="padding:10px; width:300px;">
-                        <option value="" disabled selected>-- Selecciona un archivo --</option>
-
-                        {% for archivo in archivos %}
-                        <option value="{{ archivo }}">{{ archivo }}</option>
-                        {% endfor %}
-
-                    </select>
-                </div>
-
-                <div style="margin-top:20px;">
-                    <button type="submit" style="padding:10px 20px;">
-                        Analizar
-                    </button>
-                </div>
-
-            </form>
-            {% else %}
-            <p>No tienes archivos subidos.</p>
-            {% endif %}
-
-            <div class="Cuadricula">
-
-                <!-- ========================= -->
-                <!-- 🔥 TOP 5 SERVIDORES -->
-                <!-- ========================= -->
-
-                {% if top5_detallado %}
-                <div style="margin-top:40px;">
-
-                    <h2>Top 5 Servidores con más Incidentes</h2>
-                    <br>
-
-                    <table class="tabla-incidentes">
-                        <thead>
-                            <tr>
-                                <th>Servidor</th>
-                                <th>Incidentes</th>
-                                <th>Doliente</th>
-                                <th>Tipo Server</th>
-                                <th>Ubicación</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in top5_detallado %}
-                            <tr>
-                                <td>{{ item.servidor }}</td>
-                                <td>{{ item.cantidad }}</td>
-                                <td>{{ item.doliente }}</td>
-                                <td>{{ item.tipo_server }}</td>
-                                <td>{{ item.ubicacion }}</td>
-                            </tr>
+                            {% for archivo in archivos %}
+                            <option value="{{ archivo }}">{{ archivo }}</option>
                             {% endfor %}
-                        </tbody>
-                    </table>
-                    <div style="margin-top:30px;" id="analizarCopiar">
-                        <button onclick="copiarAnalisis()">
-                            Copiar análisis
+
+                        </select>
+                    </div>
+
+                    <div style="margin-top:20px;">
+                        <button type="submit" style="padding:10px 20px;">
+                            Analizar
                         </button>
                     </div>
-                </div>
+
+                </form>
+                {% else %}
+                <p>No tienes archivos subidos.</p>
                 {% endif %}
 
+                <div class="Cuadricula">
 
-                <!-- ========================= -->
-                <!-- 🔥 TABLA DETALLE INCIDENTES -->
-                <!-- ========================= -->
+                    <!-- ========================= -->
+                    <!-- 🔥 TOP 5 SERVIDORES -->
+                    <!-- ========================= -->
 
-                {% if incidentes %}
-                <div style="margin-top:40px;">
+                    {% if top5_detallado %}
+                    <div style="margin-top:40px;">
 
-                    <h2>Detalle de Incidentes Filtrados</h2>
-                    <br>
+                        <h2>Top 5 Servidores con más Incidentes</h2>
+                        <br>
 
-                    <table class="tabla-incidentes">
-                        <thead>
-                            <tr>
-                                <th>Mostrar ID</th>
-                                <th>Analista</th>
-                                <th>Estado</th>
-                                <th>Resumen</th>
-                                <th>External Ticket</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for i in incidentes %}
-                            <tr>
-                                <td>{{ i.mostrar_id }}</td>
-                                <td>{{ i.analista }}</td>
-                                <td>{{ i.estado }}</td>
-                                <td>{{ i.resumen }}</td>
-                                <td>{{ i.ticket }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                        <table class="tabla-incidentes">
+                            <thead>
+                                <tr>
+                                    <th>Servidor</th>
+                                    <th>Incidentes</th>
+                                    <th>Doliente</th>
+                                    <th>Tipo Server</th>
+                                    <th>Ubicación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in top5_detallado %}
+                                <tr>
+                                    <td>{{ item.servidor }}</td>
+                                    <td>{{ item.cantidad }}</td>
+                                    <td>{{ item.doliente }}</td>
+                                    <td>{{ item.tipo_server }}</td>
+                                    <td>{{ item.ubicacion }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <br>
+                        <div style="margin-top:30px;" id="analizarCopiar">
+                            <button onclick="copiarAnalisis()">
+                                Copiar análisis
+                            </button>
+                        </div>
+                    </div>
+                    {% endif %}
 
+
+                    <!-- ========================= -->
+                    <!-- 🔥 TABLA DETALLE INCIDENTES -->
+                    <!-- ========================= -->
+
+                    {% if incidentes %}
+                    <div style="margin-top:40px;">
+
+                        <h2>Detalle de Incidentes Filtrados</h2>
+                        <br>
+
+                        <table class="tabla-incidentes">
+                            <thead>
+                                <tr>
+                                    <th>Mostrar ID</th>
+                                    <th>Analista</th>
+                                    <th>Estado</th>
+                                    <th>Resumen</th>
+                                    <th>External Ticket</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in incidentes %}
+                                <tr>
+                                    <td>{{ i.mostrar_id }}</td>
+                                    <td>{{ i.analista }}</td>
+                                    <td>{{ i.estado }}</td>
+                                    <td>{{ i.resumen }}</td>
+                                    <td>{{ i.ticket }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
-
 
         </div>
     </main>

@@ -1,137 +1,200 @@
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 24px;
-    padding: 8px 0;
+.content-area .page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(253, 184, 19, 0.15);
 }
 
-/* Tarjeta convertida en Enlace */
-.adjustable-card {
-    /* Importante para enlaces: quitar subrayado y color azul por defecto */
-    text-decoration: none;
-    color: inherit; 
-    
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 20px;
+.content-area .page-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.content-area .cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.content-area .adjustable-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Efecto de brillo al pasar el mouse */
-.adjustable-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 208, 0, 0.05), transparent);
-    transition: left 0.5s ease;
-}
-
-.adjustable-card:hover::before {
-    left: 100%;
-}
-
-/* Efecto Hover del Enlace */
-.adjustable-card:hover {
-    border-color: var(--accent-yellow);
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(255, 208, 0, 0.1);
-}
-
-/* Círculo de imagen (Fijo) */
-.card-image-circle {
-    width: 90px;
-    height: 90px;
-    min-width: 90px;
-    min-height: 90px;
-    max-width: 90px;
-    max-height: 90px;
-    border-radius: 50%;
-    background-color: var(--bg-input);
-    border: 3px solid var(--border-color);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 1rem;
+    padding: 1.75rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
-    flex-shrink: 0;
+    overflow: hidden;
+    background-image: linear-gradient(160deg, rgba(253, 184, 19, 0.04) 0%, transparent 50%);
 }
 
-.card-image-circle img {
+.content-area .adjustable-card:hover {
+    border-color: rgba(253, 184, 19, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(253, 184, 19, 0.05);
+    transform: translateY(-4px);
+}
+
+.content-area .adjustable-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(253, 184, 19, 0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-area .adjustable-card:hover::before {
+    opacity: 1;
+}
+
+.content-area .card-image-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(253, 184, 19, 0.15);
+    background-color: rgba(253, 184, 19, 0.05);
+    flex-shrink: 0;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-area .adjustable-card:hover .card-image-circle {
+    border-color: rgba(253, 184, 19, 0.4);
+    box-shadow: 0 0 20px rgba(253, 184, 19, 0.1);
+}
+
+.content-area .card-image-circle img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s ease;
 }
 
-.image-fallback {
-    width: 100%;
-    height: 100%;
-    display: none; /* Se muestra con JS si la imagen falla, o inline-style */
+.content-area .adjustable-card:hover .card-image-circle img {
+    transform: scale(1.08);
+}
+
+.content-area .image-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+    z-index: 0;
 }
 
-.image-fallback svg {
-    width: 36px;
-    height: 36px;
-    stroke: var(--text-muted);
-    transition: stroke 0.3s ease;
+.content-area .image-fallback svg {
+    width: 32px;
+    height: 32px;
+    color: var(--text-muted);
+    opacity: 0.5;
 }
 
-/* Hover específico del círculo */
-.adjustable-card:hover .card-image-circle {
-    border-color: var(--accent-yellow);
-    box-shadow: 0 0 20px rgba(255, 208, 0, 0.15);
-}
-
-.adjustable-card:hover .image-fallback svg {
-    stroke: var(--accent-yellow);
-}
-
-/* Texto de la tarjeta */
-.card-label {
-    font-size: 13px;
+.content-area .card-label {
+    font-size: 0.85rem;
     font-weight: 600;
+    color: var(--text-secondary);
     text-align: center;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 6px 12px;
-    background-color: rgba(255, 255, 255, 0.03);
-    border-radius: 20px;
-    transition: all 0.3s ease;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+    letter-spacing: 0.2px;
 }
 
-.adjustable-card:hover .card-label {
-    background-color: var(--accent-yellow-dim);
+.content-area .adjustable-card:hover .card-label {
     color: var(--accent-yellow);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 16px;
+.content-area .adjustable-card[href="#"] {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: default;
+}
+
+.content-area .adjustable-card[href="#"] .card-image-circle {
+    border-color: rgba(255, 255, 255, 0.06);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.content-area .adjustable-card[href="#"] .card-label {
+    color: var(--text-muted);
+}
+
+.content-area {
+    padding: 2rem;
+    flex: 1;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 1200px) {
+    .content-area .cards-container {
+        grid-template-columns: repeat(3, 1fr);
     }
-    
-    .adjustable-card { padding: 16px; }
-    
-    .card-image-circle {
-        width: 75px; height: 75px;
-        min-width: 75px; min-height: 75px;
-        max-width: 75px; max-height: 75px;
+}
+
+@media (max-width: 900px) {
+    .content-area .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .content-area .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .content-area .adjustable-card {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .content-area .card-image-circle {
+        width: 64px;
+        height: 64px;
+    }
+
+    .content-area .image-fallback svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .content-area .card-label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .content-area .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .content-area .adjustable-card {
+        flex-direction: row;
+        padding: 1rem 1.25rem;
+        gap: 1rem;
+    }
+
+    .content-area .card-image-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .content-area .card-label {
+        text-align: left;
     }
 }

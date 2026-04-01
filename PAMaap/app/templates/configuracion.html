@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAMaap - Configuracion</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/configuracion.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
@@ -136,56 +137,56 @@
         <div class="content-area">
             <h1 class="page-title">Configuración</h1>
             <p class="page-subtitle">Personaliza tu experiencia y ajustes de cuenta.</p>
+            <div class="buscadores">
+                <div class="settings-section">
+                    <h3>Notificaciones</h3>
 
-            <div class="settings-section">
-                <h3>Notificaciones</h3>
-
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <span class="setting-title">Alertas de Correo</span>
-                        <span class="setting-desc">Recibe notificaciones importantes en tu email.</span>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Alertas de Correo</span>
+                            <span class="setting-desc">Recibe notificaciones importantes en tu email.</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
                     </div>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Notificaciones Push</span>
+                            <span class="setting-desc">Alertas en tiempo real dentro del portal.</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <span class="setting-title">Notificaciones Push</span>
-                        <span class="setting-desc">Alertas en tiempo real dentro del portal.</span>
+                <div class="settings-section">
+                    <h3>Seguridad</h3>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Cambiar Contraseña</span>
+                            <span class="setting-desc">Actualiza tu contraseña de acceso.</span>
+                        </div>
+                        <button class="setting-btn">Cambiar</button>
                     </div>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Autenticación de Dos Factores</span>
+                            <span class="setting-desc">Añade una capa extra de seguridad.</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
-
-            <div class="settings-section">
-                <h3>Seguridad</h3>
-
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <span class="setting-title">Cambiar Contraseña</span>
-                        <span class="setting-desc">Actualiza tu contraseña de acceso.</span>
-                    </div>
-                    <button class="setting-btn">Cambiar</button>
-                </div>
-
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <span class="setting-title">Autenticación de Dos Factores</span>
-                        <span class="setting-desc">Añade una capa extra de seguridad.</span>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-
         </div>
     </main>
 

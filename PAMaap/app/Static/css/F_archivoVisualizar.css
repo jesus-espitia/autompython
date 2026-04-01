@@ -1,0 +1,331 @@
+.content-area .page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px rgba(253, 184, 19, 0.15);
+}
+
+.content-area .buscadores > h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-yellow);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.content-area .buscadores > form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background-color: rgba(253, 184, 19, 0.03);
+    border: 1px dashed rgba(253, 184, 19, 0.2);
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.content-area .buscadores > form:hover {
+    border-color: rgba(253, 184, 19, 0.4);
+}
+
+.content-area .buscadores > form select {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.6rem 2.2rem 0.6rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6.5 6 6.5-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-area .buscadores > form select:focus {
+    border-color: rgba(253, 184, 19, 0.4);
+    box-shadow: 0 0 0 3px rgba(253, 184, 19, 0.05);
+}
+
+.content-area .buscadores > form select option {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+}
+
+.content-area .buscadores > form > button[type="submit"] {
+    background-color: transparent;
+    color: var(--accent-yellow);
+    border: 1px solid rgba(253, 184, 19, 0.4);
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.content-area .buscadores > form > button[type="submit"]:hover {
+    background-color: var(--accent-yellow);
+    color: #000;
+    box-shadow: 0 0 15px rgba(253, 184, 19, 0.2);
+}
+
+.content-area .buscadores > button {
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.content-area .buscadores > button:hover {
+    color: var(--accent-yellow);
+    border-color: rgba(253, 184, 19, 0.3);
+    background-color: rgba(253, 184, 19, 0.06);
+    box-shadow: 0 0 12px rgba(253, 184, 19, 0.05);
+}
+
+.content-area .buscadores > button:active {
+    transform: scale(0.97);
+}
+
+.content-area .buscadores > button:nth-last-of-type(1) {
+    color: var(--accent-yellow);
+    border-color: rgba(253, 184, 19, 0.3);
+    background-color: rgba(253, 184, 19, 0.08);
+    font-weight: 600;
+}
+
+.content-area .buscadores > button:nth-last-of-type(1):hover {
+    background-color: var(--accent-yellow);
+    color: #000;
+    box-shadow: 0 0 18px rgba(253, 184, 19, 0.2);
+}
+
+.content-area .buscadores > button:nth-last-of-type(2) {
+    color: #ff6b6b;
+    border-color: rgba(255, 107, 107, 0.15);
+}
+
+.content-area .buscadores > button:nth-last-of-type(2):hover {
+    border-color: rgba(255, 107, 107, 0.3);
+    background-color: rgba(255, 107, 107, 0.08);
+    box-shadow: 0 0 12px rgba(255, 107, 107, 0.08);
+    color: #ff6b6b;
+}
+
+
+.content-area #tabla {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1rem !important;
+    background-color: var(--bg-card);
+}
+
+.content-area #tabla thead tr {
+    background-color: rgba(253, 184, 19, 0.06);
+}
+
+.content-area #tabla th {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    text-align: left;
+    border-bottom: 1px solid rgba(253, 184, 19, 0.12);
+    white-space: nowrap;
+    position: relative;
+    cursor: text;
+}
+
+.content-area #tabla th:focus {
+    outline: 2px solid rgba(253, 184, 19, 0.3);
+    outline-offset: -2px;
+    background-color: rgba(253, 184, 19, 0.1);
+}
+
+.content-area #tabla th:last-child {
+    text-align: center;
+    width: 70px;
+    min-width: 70px;
+    color: var(--text-muted);
+    font-weight: 600;
+    cursor: default;
+    background-color: rgba(255, 255, 255, 0.02);
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.content-area #tabla td {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    cursor: text;
+    transition: background-color 0.15s ease;
+}
+
+.content-area #tabla td:focus {
+    outline: 2px solid rgba(253, 184, 19, 0.25);
+    outline-offset: -2px;
+    background-color: rgba(253, 184, 19, 0.05);
+}
+
+.content-area #tabla td:nth-last-child(2) {
+    border-right: none;
+}
+
+.content-area #tabla td:last-child {
+    text-align: center;
+    border-right: none;
+    background-color: rgba(255, 255, 255, 0.01);
+    padding: 0.5rem;
+    cursor: default;
+}
+
+.content-area #tabla td:last-child:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+.content-area #tabla tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+.content-area #tabla tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.content-area #tabla tbody tr:hover {
+    background-color: rgba(253, 184, 19, 0.04);
+}
+
+.content-area #tabla td button {
+    background: transparent;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.content-area #tabla td button:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+    border-color: #ff6b6b;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.15);
+}
+
+.content-area {
+    padding: 2rem;
+    flex: 1;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .content-area .buscadores > form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .content-area .buscadores > form select {
+        min-width: 100%;
+    }
+
+    .content-area .buscadores > form > button[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
+
+    .content-area .buscadores > button {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .content-area .page-title {
+        font-size: 1.5rem;
+    }
+
+    .content-area #tabla {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+    }
+
+    .content-area #tabla thead,
+    .content-area #tabla tbody,
+    .content-area #tabla tr,
+    .content-area #tabla th,
+    .content-area #tabla td {
+        display: block;
+    }
+
+
+    .content-area #tabla thead {
+        position: absolute;
+        left: -9999px;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .content-area #tabla tr {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        margin-bottom: 0.5rem;
+        background-color: var(--bg-card);
+        border-radius: 8px;
+    }
+
+    .content-area #tabla td {
+        border: none;
+        padding: 0.35rem 0;
+        font-size: 0.8rem;
+    }
+
+    .content-area #tabla td:last-child {
+        padding-top: 0.5rem;
+        text-align: right;
+    }
+
+    .content-area #tabla td button {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+}

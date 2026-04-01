@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAMaap - Mi Ficha</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mi_ficha.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
@@ -136,49 +137,51 @@
 
         <!-- Cuerpo de la Página: MI FICHA -->
         <div class="content-area">
-            <h1 class="page-title">Mi Ficha</h1>
-            <p class="page-subtitle">Revisa y actualiza tu información personal.</p>
+            <div class="buscadores">
+                <h1 class="page-title">Mi Ficha</h1>
+                <p class="page-subtitle">Revisa y actualiza tu información personal.</p>
 
-            <div class="profile-card">
-                <div class="profile-header">
-                    <div class="profile-avatar-large">PP</div>
-                    <div class="profile-basic-info">
-                        <h2>{{ session["user"]["fullname"] }}</h2>
-                        <span class="profile-role-tag">Usuario Activo</span>
-                    </div>
-                </div>
-
-                <div class="profile-details">
-                    <div class="detail-row">
-                        <div class="detail-label">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                <circle cx="12" cy="7" r="4" />
-                            </svg>
-                            Nombre Completo
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar-large">PP</div>
+                        <div class="profile-basic-info">
+                            <h2>{{ session["user"]["fullname"] }}</h2>
+                            <span class="profile-role-tag">Usuario Activo</span>
                         </div>
-                        <div class="detail-value">{{ session["user"]["fullname"] }}</div>
                     </div>
-                    <div class="detail-row">
-                        <div class="detail-label">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
-                            Correo Electrónico
+
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <div class="detail-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                                Nombre Completo
+                            </div>
+                            <div class="detail-value">{{ session["user"]["fullname"] }}</div>
                         </div>
-                        <div class="detail-value">{{ session["user"]["email"] }}</div>
+                        <div class="detail-row">
+                            <div class="detail-label">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                                Correo Electrónico
+                            </div>
+                            <div class="detail-value">{{ session["user"]["email"] }}</div>
+                        </div>
                     </div>
-                </div>
 
-                <button class="edit-profile-btn">Editar Información</button>
-                <br><br>
+                    <button class="edit-profile-btn">Editar Información</button>
+                    <br><br>
 
-                <div class="logout">
-                    <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+                    <div class="logout">
+                        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+                    </div>
                 </div>
             </div>
-
         </div>
     </main>
 

@@ -1,233 +1,258 @@
-/* ===========================================
-   ESTILOS PARA LA PÁGINA "DOCUMENTOS"
-   (Dentro de .content-area)
-   =========================================== */
-
-/* Títulos y Texto */
-.content-area h2 {
-    font-size: 22px;
+.content-area .page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--text-main);
-    margin-top: 30px;
-    margin-bottom: 20px;
-    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(253, 184, 19, 0.15);
 }
 
-.content-area h3 {
-    font-size: 18px;
+.content-area .page-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.content-area .documentosPublicos .action-btn {
+    display: inline-block;
+    background-color: transparent;
     color: var(--accent-yellow);
-    /* Resaltamos el mes con el color acento */
-    margin-top: 32px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    border: 1px solid rgba(253, 184, 19, 0.5);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(253, 184, 19, 0.05);
 }
 
-.content-area strong {
-    color: var(--text-secondary);
-    font-size: 14px;
-    display: block;
-    margin-bottom: 8px;
-    margin-top: 16px;
+.content-area .documentosPublicos .action-btn:hover {
+    background-color: var(--accent-yellow);
+    color: #000;
+    box-shadow: 0 0 25px rgba(253, 184, 19, 0.2);
+    transform: translateY(-2px);
 }
 
-.content-area hr {
-    border: 0;
-    height: 1px;
-    background-color: var(--border-color);
-    margin: 40px 0;
-}
-
-/* Formularios (Contenedores) */
-.content-area form {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 24px;
+.content-area .buscadores > form {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-    align-items: flex-end;
-    /* Alinea botones abajo si hay inputs de distinta altura */
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background-color: rgba(253, 184, 19, 0.03);
+    border: 1px dashed rgba(253, 184, 19, 0.2);
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
 }
 
-/* Inputs y Selects */
-.content-area select,
-.content-area input[type="text"],
-.content-area input[type="file"] {
-    background-color: var(--bg-input);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 12px 16px;
+.content-area .buscadores > form:hover {
+    border-color: rgba(253, 184, 19, 0.4);
+}
+
+.content-area select {
+    padding: 0.6rem 2.2rem 0.6rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
     color: var(--text-main);
-    font-size: 14px;
-    flex: 1;
-    /* Permite que se estiren para llenar espacio */
-    min-width: 200px;
-    /* Ancho mínimo para que no se rompan en móvil */
-    transition: border-color 0.2s;
-}
-
-.content-area select:focus,
-.content-area input:focus {
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
     outline: none;
-    border-color: var(--accent-yellow);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6.5 6 6.5-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Botones Principales (Crear Carpeta / Subir) */
-.content-area form button[type="submit"] {
-    background-color: var(--accent-yellow);
-    color: #000000;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
-    height: fit-content;
-    /* Evita que estiren el formulario */
+.content-area select:focus {
+    border-color: rgba(253, 184, 19, 0.4);
+    box-shadow: 0 0 0 3px rgba(253, 184, 19, 0.05);
 }
 
-.content-area form button[type="submit"]:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+.content-area select option {
+    background-color: var(--bg-card);
+    color: var(--text-main);
 }
 
-/* Estilo del input file para que no desentonte */
 .content-area input[type="file"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.6rem;
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-size: 0.85rem;
     cursor: pointer;
-    padding: 10px;
 }
 
 .content-area input[type="file"]::file-selector-button {
-    background-color: var(--bg-sidebar);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-main);
-    border: 1px solid var(--border-color);
-    padding: 6px 12px;
+    border: none;
+    padding: 0.4rem 0.8rem;
     border-radius: 4px;
+    margin-right: 1rem;
     cursor: pointer;
-    margin-right: 12px;
-    transition: all 0.2s;
+    font-family: inherit;
+    font-size: 0.8rem;
+    transition: background 0.2s;
 }
 
 .content-area input[type="file"]::file-selector-button:hover {
-    background-color: var(--accent-yellow);
-    color: #000000;
-    border-color: var(--accent-yellow);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Listas de Documentos */
-.content-area ul {
+.content-area .buscadores > form > button[type="submit"] {
+    background-color: transparent;
+    color: var(--accent-yellow);
+    border: 1px solid rgba(253, 184, 19, 0.4);
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.content-area .buscadores > form > button[type="submit"]:hover {
+    background-color: var(--accent-yellow);
+    color: #000;
+    box-shadow: 0 0 15px rgba(253, 184, 19, 0.2);
+}
+
+.content-area .buscadores hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin: 1.5rem 0;
+}
+
+.content-area .buscadores > h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-yellow);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(253, 184, 19, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-yellow);
+}
+
+.content-area .buscadores > strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 0.5rem 0;
+    padding-left: 0.5rem;
+    letter-spacing: 0.3px;
+}
+
+.content-area .buscadores ul {
     list-style: none;
     padding: 0;
+    margin: 0.5rem 0 1rem 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 24px;
+    gap: 0.5rem;
 }
 
-.content-area li {
-    background-color: var(--bg-sidebar);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 12px 16px;
+.content-area .buscadores ul li {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    transition: border-color 0.2s;
-    font-size: 14px;
-}
-
-.content-area li:hover {
-    border-color: #444;
-}
-
-/* Texto dentro de la lista */
-.content-area li span,
-.content-area li {
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
     color: var(--text-main);
+    transition: all 0.3s ease;
+    flex-wrap: wrap;
 }
 
-/* Botones de Acción dentro de la lista (Ver, Descargar) */
-.content-area li a {
-    color: var(--accent-yellow);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
+.content-area .buscadores ul li:hover {
+    border-color: rgba(253, 184, 19, 0.15);
+    transform: translateX(4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.content-area li a:hover {
-    background-color: var(--accent-yellow-dim);
-}
-
-/* Botón Eliminar (Formulario inline dentro del li) */
-.content-area li form {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
+.content-area .buscadores ul li form {
     display: inline-flex;
-    /* Para que el botón se alinee bien */
+    margin-left: auto;
+    padding: 0;
+    background: transparent;
+    border: none;
 }
 
-.content-area li form button {
+.content-area .buscadores ul li form button {
     background-color: transparent;
-    color: #ff4d4d;
-    /* Color rojo suave para acciones destructivas */
-    border: 1px solid #ff4d4d;
-    border-radius: 4px;
-    padding: 4px 10px;
-    font-size: 12px;
+    color: #ff6b6b;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    padding: 0.3rem 0.75rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: inherit;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
-.content-area li form button:hover {
-    background-color: #ff4d4d;
-    color: #ffffff;
+.content-area .buscadores ul li form button:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(255, 107, 107, 0.15);
 }
 
-/* ===========================================
-   RESPONSIVE PARA CONTENIDO DOCUMENTOS
-   =========================================== */
+.content-area {
+    padding: 2rem;
+    flex: 1;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 @media (max-width: 768px) {
-    .content-area form {
+    .content-area .buscadores > form {
         flex-direction: column;
         align-items: stretch;
-        /* Ocupa todo el ancho en móvil */
     }
 
     .content-area select,
     .content-area input[type="file"] {
         width: 100%;
+        min-width: 0;
     }
 
-    .content-area li {
+    .content-area .buscadores > form > button[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
+
+    .content-area .buscadores ul li {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 0.5rem;
     }
 
-    /* Hacemos que los botones de acción ocupen todo el ancho en móvil si se desea */
-    .content-area li a,
-    .content-area li form {
+    .content-area .buscadores ul li form {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-area .page-title {
+        font-size: 1.5rem;
+    }
+
+    .content-area .documentosPublicos .action-btn {
         width: 100%;
-    }
-
-    .content-area li a {
-        display: block;
         text-align: center;
-        padding: 8px;
-    }
-
-    .content-area li form button {
-        width: 100%;
-        padding: 8px;
     }
 }

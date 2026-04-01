@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAMaap - Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
@@ -139,8 +140,7 @@
         <div class="content-area">
             <h1 class="page-title">Bienvenido, {{ session["user"]["fullname"] }}</h1>
             <p class="page-subtitle">Panel de control y acceso rapido a tus herramientas.</p>
-
-            <!-- Módulo de Imagen (Simulación del "img" de la captura) -->
+            
             <div class="image-module">
                 <div class="image-placeholder">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
