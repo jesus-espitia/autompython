@@ -102,14 +102,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 text = "Se seleccionará un mes para procesar y unificar múltiples archivos relacionados. El sistema consolidará la información y generará automáticamente un reporte completo, el cual será descargado en formato ZIP para su uso y distribución.";
             }
 
-            else if (url.includes("importar")) {
-                title = "Importar Información";
-                text = "Se importarán nuevos datos. Esto podría sobrescribir información existente.";
+            else if (url.includes("")) {
+                title = "";
+                text = "";
             }
 
-            else if (url.includes("configurar")) {
-                title = "Configuración";
-                text = "Accederás a configuraciones críticas del sistema. Usa esta opción con cuidado.";
+            else if (url.includes("")) {
+                title = "";
+                text = "";
             }
 
             Swal.fire({
