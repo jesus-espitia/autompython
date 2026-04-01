@@ -1,4 +1,4 @@
-from routes import funciones, comparacion, archivos, discoMemoriaCpu,documentosPublicos
+from routes import funciones, comparacion, archivos, discoMemoriaCpu,documentosPublicos, notificaciones
 import glob
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 import secrets
@@ -19,6 +19,7 @@ from werkzeug.utils import secure_filename
 # =========================
 
 app = Flask(__name__, template_folder="Templates", static_folder="Static")
+notificaciones.activar_notificaciones(app)
 app.config.from_object(Config)
 app.secret_key = app.config["SECRET_KEY"]
 
@@ -480,6 +481,12 @@ def documentosPublicosVisualizar():
     if "user" not in session:
         return redirect(url_for("login"))
     return documentosPublicos.documentosPublicos()
+
+@app.route("/auditoria", methods=["GET", "POST"])
+def prevencionNotificaciones():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return notificaciones.generarNotificacionSMTP()
 #====================================================================================================================================
 #====================================================================================================================================
 
