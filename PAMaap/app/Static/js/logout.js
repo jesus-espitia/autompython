@@ -12,3 +12,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+const toggle = document.getElementById('userNameToggle');
+const dropdown = document.getElementById('userDropdown');
+
+toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('show');
+});
+
+document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target) && e.target !== toggle) {
+        dropdown.classList.remove('show');
+    }
+});
+
+dropdown.querySelector('a').addEventListener('click', (e) => {
+    e.stopPropagation();
+});
