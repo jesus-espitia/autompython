@@ -6,6 +6,12 @@
     text-shadow: 0 0 20px rgba(253, 184, 19, 0.15);
 }
 
+.content-area .page-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
 .content-area .buscadores > h2 {
     font-size: 1.1rem;
     font-weight: 600;
