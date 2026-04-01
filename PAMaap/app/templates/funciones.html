@@ -142,8 +142,7 @@
                 <div class="cards-container">
                     <a href="/funcion/comparacionArchivos" class="adjustable-card">
                         <div class="card-image-circle">
-                            <!-- Cambia la ruta src por tu imagen local -->
-                            <img src="../Static/img/hoja.png" alt="Analisis">
+                            <img src="{{ url_for('static', filename='img/funciones/PAMaap-ComparaciondeArchivos.png') }}" alt="Analisis">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -157,7 +156,7 @@
 
                     <a href="/funcion/reportes" class="adjustable-card">
                         <div class="card-image-circle">
-                            <img src="../Static/img/hoja azul.png" alt="Reportes">
+                            <img src="{{ url_for('static', filename='img/funciones/PAMaap-Top5Inc.png') }}" alt="Reportes">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -171,7 +170,7 @@
 
                     <a href="/funcion/archivoVisualizar" class="adjustable-card">
                         <div class="card-image-circle">
-                            <img src="../Static/img/hoja naranja.png" alt="Estadisticas">
+                            <img src="{{ url_for('static', filename='img/funciones/PAMaap-GestióndeAlimentadores.png') }}" alt="Estadisticas">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -185,7 +184,7 @@
 
                     <a href="/funcion/UnificarArchivos" class="adjustable-card">
                         <div class="card-image-circle">
-                            <img src="../Static/img/bambu.png" alt="Exportar">
+                            <img src="{{ url_for('static', filename='img/funciones/PAMaap-UnificarArchivos.png') }}" alt="Exportar">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -199,7 +198,7 @@
 
                     <a href="#" class="adjustable-card">
                         <div class="card-image-circle">
-                            <img src="#" alt="Importar">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Importar">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -213,7 +212,46 @@
 
                     <a href="#" class="adjustable-card">
                         <div class="card-image-circle">
-                            <img src="#" alt="Configurar">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Configurar">
+                            <div class="image-fallback">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                    <polyline points="21 15 16 10 5 21" />
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="card-label">N/D</span>
+                    </a>
+                    <a href="#" class="adjustable-card">
+                        <div class="card-image-circle">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Analisis">
+                            <div class="image-fallback">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                    <polyline points="21 15 16 10 5 21" />
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="card-label">N/D</span>
+                    </a>
+                    <a href="#" class="adjustable-card">
+                        <div class="card-image-circle">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Analisis">
+                            <div class="image-fallback">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                    <polyline points="21 15 16 10 5 21" />
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="card-label">N/D</span>
+                    </a>
+                    <a href="#" class="adjustable-card">
+                        <div class="card-image-circle">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Analisis">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -227,7 +265,7 @@
                     <a href="#" class="adjustable-card">
                         <div class="card-image-circle">
                             <!-- Cambia la ruta src por tu imagen local -->
-                            <img src="#" alt="Analisis">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Analisis">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -240,7 +278,7 @@
                     </a>
                     <a href="#" class="adjustable-card">
                         <div class="card-image-circle">
-                            <img src="#" alt="Analisis">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Analisis">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -253,8 +291,7 @@
                     </a>
                     <a href="#" class="adjustable-card">
                         <div class="card-image-circle">
-                            <!-- Cambia la ruta src por tu imagen local -->
-                            <img src="#" alt="Analisis">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Analisis">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -267,50 +304,7 @@
                     </a>
                     <a href="#" class="adjustable-card">
                         <div class="card-image-circle">
-                            <!-- Cambia la ruta src por tu imagen local -->
-                            <img src="#" alt="Analisis">
-                            <div class="image-fallback">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                    <circle cx="8.5" cy="8.5" r="1.5" />
-                                    <polyline points="21 15 16 10 5 21" />
-                                </svg>
-                            </div>
-                        </div>
-                        <span class="card-label">N/D</span>
-                    </a>
-                    <a href="#" class="adjustable-card">
-                        <div class="card-image-circle">
-                            <!-- Cambia la ruta src por tu imagen local -->
-                            <img src="#" alt="Analisis">
-                            <div class="image-fallback">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                    <circle cx="8.5" cy="8.5" r="1.5" />
-                                    <polyline points="21 15 16 10 5 21" />
-                                </svg>
-                            </div>
-                        </div>
-                        <span class="card-label">N/D</span>
-                    </a>
-                    <a href="#" class="adjustable-card">
-                        <div class="card-image-circle">
-                            <!-- Cambia la ruta src por tu imagen local -->
-                            <img src="#" alt="Analisis">
-                            <div class="image-fallback">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                    <circle cx="8.5" cy="8.5" r="1.5" />
-                                    <polyline points="21 15 16 10 5 21" />
-                                </svg>
-                            </div>
-                        </div>
-                        <span class="card-label">N/D</span>
-                    </a>
-                    <a href="#" class="adjustable-card">
-                        <div class="card-image-circle">
-                            <!-- Cambia la ruta src por tu imagen local -->
-                            <img src="#" alt="Analisis">
+                            <img src="{{ url_for('static', filename='img/funciones/') }}" alt="Analisis">
                             <div class="image-fallback">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />

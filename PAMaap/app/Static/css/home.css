@@ -92,3 +92,84 @@
         height: 50px;
     }
 }
+
+/* =========================================
+   MÓDULO DE IMAGEN REAL - Content Area
+   ========================================= */
+
+.content-area .image-module {
+    margin-top: 2rem;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Overlay difuminado sobre la imagen */
+.content-area .image-module::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(253, 184, 19, 0.08) 0%,
+        rgba(10, 10, 10, 0.5) 50%,
+        rgba(10, 10, 10, 0.25) 100%
+    );
+    pointer-events: none;
+    transition: background 0.4s ease;
+    z-index: 1;
+}
+
+.content-area .image-module:hover {
+    transform: translateY(-4px);
+    border-color: rgba(253, 184, 19, 0.25);
+    box-shadow: 0 15px 40px rgba(253, 184, 19, 0.06), 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.content-area .image-module:hover::after {
+    background: linear-gradient(
+        135deg,
+        rgba(253, 184, 19, 0.12) 0%,
+        rgba(10, 10, 10, 0.35) 50%,
+        rgba(10, 10, 10, 0.15) 100%
+    );
+}
+
+/* Imagen real */
+.content-area .module-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.content-area .image-module:hover .module-image {
+    transform: scale(1.04);
+}
+
+/* =========================================
+   RESPONSIVE - Imagen Real
+   ========================================= */
+
+@media (max-width: 768px) {
+    .content-area .module-image {
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-area .image-module {
+        border-radius: 12px;
+        margin-top: 1.5rem;
+    }
+
+    .content-area .module-image {
+        height: 180px;
+    }
+}
