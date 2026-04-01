@@ -411,3 +411,10 @@ a {
         gap: 1rem;
     }
 }
+
+mark {
+    background-color: #ffe58a;
+    padding: 0 2px;
+    border-radius: 3px;
+}
+
