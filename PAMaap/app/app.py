@@ -1,4 +1,4 @@
-from routes import funciones, comparacion, archivos, discoMemoriaCpu,documentosPublicos, notificaciones
+from routes import funciones, comparacion, archivos, discoMemoriaCpu,documentosPublicos, notificaciones, F_archivosPares
 import glob
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, session
 import secrets
@@ -408,9 +408,6 @@ def subir_documento():
     return redirect(url_for("documentos"))
 #====================================================================================================================================
 #====================================================================================================================================
-# =========================
-#MI FICHA
-# =========================
 
 @app.route("/mi_ficha")
 def mi_ficha():
@@ -418,19 +415,11 @@ def mi_ficha():
         return redirect(url_for("login"))
     return render_template("mi_ficha.html")
 
-# =========================
-#configuracion
-# =========================
-
 @app.route("/configuracion")
 def configuracion():
     if "user" not in session:
         return redirect(url_for("login"))
     return render_template("configuracion.html")
-
-# =========================
-#funciones
-# =========================
 
 @app.route("/funciones")
 def funcionales():
@@ -476,23 +465,30 @@ def discoMemoriaCpuVisualizar():
         return redirect(url_for("login"))
     return discoMemoriaCpu.F_discoMemoriaCpu()
 
+@app.route("/funcion/ArchivosPares", methods=["GET", "POST"])
+def visualizarArchivosPares():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return F_archivosPares.archivosPares()
+
 @app.route("/documentosPublicos", methods=["GET", "POST"])
 def documentosPublicosVisualizar():
     if "user" not in session:
         return redirect(url_for("login"))
     return documentosPublicos.documentosPublicos()
 
-@app.route("/auditoria", methods=["GET", "POST"])
-def prevencionNotificaciones():
-    if "user" not in session:
-        return redirect(url_for("login"))
-    return notificaciones.generarNotificacionSMTP()
 #====================================================================================================================================
 #====================================================================================================================================
 
 # =========================
 # HOME Y LOGOUT
 # =========================
+
+@app.route("/auditoria", methods=["GET", "POST"])
+def prevencionNotificaciones():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    return notificaciones.generarNotificacionSMTP()
 
 @app.route("/home")
 @login_required

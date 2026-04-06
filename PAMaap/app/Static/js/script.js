@@ -102,9 +102,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 text = "Se seleccionará un mes para procesar y unificar múltiples archivos relacionados. El sistema consolidará la información y generará automáticamente un reporte completo, el cual será descargado en formato ZIP para su uso y distribución.";
             }
 
-            else if (url.includes("")) {
-                title = "";
-                text = "";
+            else if (url.includes("ArchivosPares")) {
+                title = "🔗 Cruce y Análisis de Archivos";
+                text = "Se cargarán dos archivos para analizarlos y seleccionar las columnas clave a comparar. El sistema realizará un cruce de información según el tipo elegido (coincidencias, inclusión parcial o completa), permitiendo identificar similitudes y diferencias. Podrás visualizar el resultado en tabla, copiarlo o descargarlo en formato Excel.";
             }
 
             else if (url.includes("")) {

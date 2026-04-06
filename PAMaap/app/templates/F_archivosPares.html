@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAMaap - N/D</title>
+    <title>PAMaap - Cruce de Archivos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/F_archivosPares.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logout.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}">
 </head>
@@ -137,11 +137,131 @@
         </header>
 
         <div class="content-area">
-            <h1 class="page-title">N/D</h1>
-            <p class="page-subtitle">N/D</p>
+            <h1 class="page-title">Análisis y Cruce de Archivos</h1>
+            <p class="page-subtitle">
+                Carga dos archivos, selecciona las columnas clave y cruza la información para encontrar coincidencias o
+                diferencias.
+            </p>
+
             <div class="buscadores">
-                <!-- Contenido -->
+
+                {% if error %}
+                <p style="color:red;">{{ error }}</p>
+                {% endif %}
+
+                <div class="card">
+
+                    <h3>Cargar Archivos</h3>
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        <!-- 🔒 IMPORTANTE: mantener rutas -->
+                        <input type="hidden" name="ruta_a" value="{{ ruta_a }}">
+                        <input type="hidden" name="ruta_b" value="{{ ruta_b }}">
+                        <input type="hidden" name="nombre_a" value="{{ nombre_a }}">
+                        <input type="hidden" name="nombre_b" value="{{ nombre_b }}">
+
+                        <label>Archivo A:</label>
+                        <input type="file" name="archivo_a">
+
+                        <label>Archivo B:</label>
+                        <input type="file" name="archivo_b">
+
+                        <button type="submit" name="accion" value="analizar">
+                            Analizar archivos
+                        </button>
+
+                        {% if columnas_a and columnas_b %}
+                        <hr>
+
+                        <h3>Seleccionar Columnas</h3>
+
+                        <label>Columna Archivo A:</label>
+                        <select name="columna_a">
+                            {% for col in columnas_a %}
+                            <option value="{{ col }}">{{ col }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label>Columna Archivo B:</label>
+                        <select name="columna_b">
+                            {% for col in columnas_b %}
+                            <option value="{{ col }}">{{ col }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label>Tipo de cruce:</label>
+                        <select name="tipo_join">
+                            <option value="inner">🔍 Coincidencias exactas</option>
+                            <option value="left">📄 Todo del archivo A + coincidencias</option>
+                            <option value="right">📄 Todo del archivo B + coincidencias</option>
+                            <option value="outer">🔗 Unir todo (completo)</option>
+                        </select>
+
+                        <button type="submit" name="accion" value="procesar">
+                            Procesar cruce
+                        </button>
+                        {% endif %}
+                        <h3>Resultado</h3>
+
+                        <div style="display:flex; gap:10px; margin-bottom:10px;">
+
+                            <button onclick="copiarTabla()">Copiar resultado</button>
+
+                            <button type="submit" name="accion" value="exportar">
+                                Descargar Excel
+                            </button>
+
+                        </div>
+                    </form>
+
+                    {% if resultado %}
+                    <hr>
+
+
+                    <div style="overflow:auto; max-height:400px;">
+                        <table border="1" id="tablaResultado">
+                            <thead>
+                                <tr>
+                                    {% for col in resultado[0].keys() %}
+                                    <th>{{ col }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fila in resultado %}
+                                <tr>
+                                    {% for val in fila.values() %}
+                                    <td>{{ val }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+
+                </div>
+
             </div>
+
+            <script>
+                function copiarTabla() {
+                    let tabla = document.getElementById("tablaResultado");
+                    let texto = "";
+
+                    for (let row of tabla.rows) {
+                        let fila = [];
+                        for (let cell of row.cells) {
+                            fila.push(cell.innerText);
+                        }
+                        texto += fila.join("\t") + "\n";
+                    }
+
+                    navigator.clipboard.writeText(texto);
+                    alert("Resultado copiado");
+                }
+            </script>
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/buscador_global.js') }}"></script>
