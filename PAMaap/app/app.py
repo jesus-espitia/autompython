@@ -18,7 +18,7 @@ from werkzeug.utils import secure_filename
 # CONFIGURACIÓN INICIAL
 # =========================
 
-app = Flask(__name__, template_folder="Templates", static_folder="Static")
+app = Flask(__name__, template_folder=os.path.join(os.path.dirname(__file__), "templates"))
 notificaciones.activar_notificaciones(app)
 app.config.from_object(Config)
 app.secret_key = app.config["SECRET_KEY"]
